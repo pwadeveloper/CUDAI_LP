@@ -2,6 +2,7 @@ import Nav from "@/components/layout/Nav";
 import Hero from "@/components/sections/Hero";
 import Practice from "@/components/sections/Practice";
 import Curriculum from "@/components/sections/Curriculum";
+import Instructors from "@/components/sections/Instructors";
 import Marquee from "@/components/ui/Marquee";
 import { MARQUEE } from "@/lib/content";
 
@@ -16,6 +17,7 @@ export default function Home() {
         </div>
         <Practice />
         <Curriculum />
+        <Instructors />
       </main>
     </>
   );
