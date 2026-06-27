@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CUDAI — Creative UI Development with AI
 
-## Getting Started
+Marketing landing page for the **CUDAI** course. Built to be an Awwwards-level
+showcase of the exact stack the course teaches.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (CSS-first config in `src/app/globals.css`)
+- **GSAP** + ScrollTrigger — scroll-timeline animation
+- **Lenis** — smooth scroll (driven by the GSAP ticker)
+- **Framer Motion** (`motion`) — enter animations + microinteractions
+- **@carbon/icons-react** — IBM Carbon icons
+- Self-hosted **Switzer** font (`src/fonts/`)
+
+## Getting started
+
+This repo uses **pnpm** (pinned via `packageManager` / corepack) and **Node ≥ 22**
+(see `.nvmrc`). Using a different package manager will desync the lockfile.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+corepack enable      # one-time: makes `pnpm` match the pinned version
+pnpm install
+pnpm dev             # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other scripts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build           # production build (also runs full type-check)
+pnpm start           # serve the production build
+pnpm lint            # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Before pushing:** run `pnpm build` and make sure it passes — the build does the
+TypeScript check, so a green build means the page compiles and prerenders.
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/
+    layout.tsx        # fonts + SmoothScroll provider + Grain + globals
+    page.tsx          # composes the sections, in order (see below)
+    globals.css       # Tailwind v4 @theme design tokens + base + helpers
+  components/
+    providers/        # SmoothScroll (Lenis + GSAP ticker wiring)
+    layout/           # Nav
+    sections/         # one file per page section
+    ui/               # Reveal, MagneticButton, Marquee, Grain
+  lib/
+    content.ts        # ALL copy/data, typed — sections read from here
+    constants.ts      # nav links, site meta
+    gsap.ts           # single GSAP plugin registration
+  fonts/              # Switzer woff2
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Section order
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The page is assembled in [`src/app/page.tsx`](src/app/page.tsx). Current order:
 
-## Deploy on Vercel
+1. `Hero`
+2. tech `Marquee` strip
+3. `Practice` — Design / Code / Ship card stack
+4. `Outcomes` — scroll-fill statement (`id="outcomes"`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Adding a section:** create `src/components/sections/YourSection.tsx`, put its copy
+in `lib/content.ts`, then add it to `page.tsx` in the right position. Keep each
+section self-contained so insertions don't conflict.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Conventions (so changes don't break the build)
+
+- Anything using GSAP/Lenis/Framer hooks must be a client component (`"use client"`).
+- Import the configured GSAP from `@/lib/gsap` — don't call `registerPlugin` elsewhere.
+- Never read `window`/`matchMedia` during render (hydration mismatch) — only in effects.
+- Respect `prefers-reduced-motion`: animations should degrade to a readable static state.
+- Put copy in `lib/content.ts`, not hardcoded in JSX.
