@@ -30,7 +30,6 @@ const SKINS = [
 export default function Curriculum() {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
   useGSAP(
@@ -55,9 +54,6 @@ export default function Curriculum() {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (bar.current) gsap.set(bar.current, { scaleX: self.progress });
-          },
         },
       });
 
@@ -70,7 +66,7 @@ export default function Curriculum() {
     <section
       id="curriculum"
       ref={root}
-      className={`relative flex flex-col bg-paper-2 ${
+      className={`relative flex flex-col bg-paper ${
         reduced ? "pb-24" : "h-svh overflow-hidden"
       }`}
     >
@@ -134,16 +130,6 @@ export default function Curriculum() {
           </article>
         </div>
       </div>
-
-      {/* Scroll progress */}
-      {!reduced && (
-        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-line">
-          <div
-            ref={bar}
-            className="h-full origin-left scale-x-0 bg-ink"
-          />
-        </div>
-      )}
     </section>
   );
 }

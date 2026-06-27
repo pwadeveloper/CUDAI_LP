@@ -1,9 +1,8 @@
 import Reveal from "@/components/ui/Reveal";
 import { INSTRUCTORS, INSTRUCTORS_INTRO } from "@/lib/content";
 
-// Warm studio-style placeholder behind each portrait until a real photo is set.
-const PLACEHOLDER =
-  "radial-gradient(120% 90% at 50% 0%, #3a332b 0%, #211d18 55%, #15140f 100%)";
+// Solid placeholder behind each portrait until a real photo is set.
+const PLACEHOLDER = "#211d18";
 
 export default function Instructors() {
   return (
