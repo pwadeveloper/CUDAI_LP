@@ -133,6 +133,26 @@ export const AUDIENCE: string[] = [
   "Creators building digital products",
 ];
 
+export type Instructor = {
+  name: string;
+  // Optional one-liner shown under the name tag — left blank by default so we
+  // don't invent titles for real people. Fill in when known.
+  role?: string;
+  // Drop a portrait in /public/instructors and set the path here; until then a
+  // styled placeholder (initial + gradient) renders in its place.
+  src?: string;
+  initial: string;
+};
+
+export const INSTRUCTORS_INTRO =
+  "Not lecturers — working builders who ship. You'll learn the exact AI-driven workflow they use to design, code, and launch premium work: taught live, hands-on, with direct feedback on your own projects.";
+
+export const INSTRUCTORS: Instructor[] = [
+  { name: "Yahaya Muhammad", initial: "Y" },
+  { name: "Mudia", initial: "M" },
+  { name: "Precious", initial: "P" },
+];
+
 export type Faq = { q: string; a: string };
 
 export const FAQS: Faq[] = [
