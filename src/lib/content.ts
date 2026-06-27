@@ -42,6 +42,28 @@ export const PRACTICE = {
   ],
 } as const;
 
+// "You'll work with modern tools..." — scroll-fill statement with inline IBM icons.
+// Rendered in DOM order: text segments split into words, icon segments become chips.
+export type ToolkitSegment =
+  | { type: "text"; value: string }
+  | { type: "icon"; name: "cube" | "code" | "rocket"; tone: "pink" | "amber" | "green" };
+
+export const TOOLKIT: { segments: ToolkitSegment[] } = {
+  segments: [
+    {
+      type: "text",
+      value:
+        "You'll work with modern tools and AI coding agents to create fast, polished work that stands out. By the end, you'll have the skills to",
+    },
+    { type: "icon", name: "cube", tone: "pink" },
+    { type: "text", value: "design" },
+    { type: "icon", name: "code", tone: "amber" },
+    { type: "text", value: "build" },
+    { type: "icon", name: "rocket", tone: "green" },
+    { type: "text", value: "and launch with confidence." },
+  ],
+};
+
 export type Part = {
   no: string;
   title: string;

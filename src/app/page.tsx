@@ -1,6 +1,7 @@
 import Nav from "@/components/layout/Nav";
 import Hero from "@/components/sections/Hero";
 import Practice from "@/components/sections/Practice";
+import Outcomes from "@/components/sections/Outcomes";
 import Marquee from "@/components/ui/Marquee";
 import { MARQUEE } from "@/lib/content";
 
@@ -14,6 +15,7 @@ export default function Home() {
           <Marquee items={MARQUEE} />
         </div>
         <Practice />
+        <Outcomes />
       </main>
     </>
   );
