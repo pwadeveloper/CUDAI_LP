@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens (Tailwind v4 CSS-first config)
+ * Generates utilities: bg-paper, text-ink, bg-accent, border-line ...
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-paper: #faf9f5;
+  --color-paper-2: #f2f0e9;
+  --color-ink: #16150f;
+  --color-ink-2: #2a2925;
+  --color-muted: #6f6d63;
+  --color-accent: #f6a93b;
+  --color-accent-deep: #e08a14;
+  --color-panel: #15140f;
+  --color-line: color-mix(in srgb, #16150f 12%, transparent);
+  --color-line-strong: color-mix(in srgb, #16150f 26%, transparent);
+
+  --font-sans: var(--font-switzer), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Component-level helpers
+ * ------------------------------------------------------------------ */
+
+/* Fluid display headline — the hero title */
+.hero-title {
+  font-weight: 600;
+  font-size: clamp(2.75rem, 9.2vw, 9.25rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+
+/* Mask-reveal line: clips the words as they translate up from below */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em; /* breathing room so descenders/box aren't clipped at rest */
+}
+
+.word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* The amber marker highlight behind "AI." */
+.highlight {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-2.4deg);
+  padding-inline: 0.12em;
+}
+.highlight > .highlight-bg {
+  position: absolute;
+  inset: 0.04em 0 0.02em 0;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: 0;
+}
+.highlight > .word {
+  position: relative;
+  z-index: 1;
+}
+
+/* Seamless marquee track */
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee var(--marquee-duration, 32s) linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ambient drift inside the hero panel */
+.hero-aurora {
+  animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora {
+  0% {
+    transform: rotate(0deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(28deg) scale(1.25);
+  }
+}
+
+/* Scroll cue line */
+.scroll-cue::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 38px;
+  margin-top: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-ink) 0%,
+    var(--color-ink) 50%,
+    transparent 50%
+  );
+  background-size: 100% 200%;
+  animation: cue 1.8s var(--ease-out-expo) infinite;
+}
+@keyframes cue {
+  0% {
+    background-position: 0 -100%;
+  }
+  60%,
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+/* Reduced motion: strip the showy stuff, keep everything readable */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .highlight > .highlight-bg {
+    transform: scaleX(1);
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

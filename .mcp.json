@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "kontinuo": {
+      "args": [
+        "--store",
+        "/Users/mudia/Desktop/Desktop Files/Projects/CUDAI/.kontinuo",
+        "mcp"
+      ],
+      "command": "/usr/local/bin/kontinuo",
+      "type": "stdio"
+    }
+  }
+}
