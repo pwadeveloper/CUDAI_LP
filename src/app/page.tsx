@@ -4,6 +4,7 @@ import Practice from "@/components/sections/Practice";
 import Curriculum from "@/components/sections/Curriculum";
 import Outcomes from "@/components/sections/Outcomes";
 import Instructors from "@/components/sections/Instructors";
+import Faq from "@/components/sections/Faq";
 import Marquee from "@/components/ui/Marquee";
 import { MARQUEE } from "@/lib/content";
 
@@ -20,6 +21,7 @@ export default function Home() {
         <Curriculum />
         <Outcomes />
         <Instructors />
+        <Faq />
       </main>
     </>
   );

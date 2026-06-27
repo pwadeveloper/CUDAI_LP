@@ -12,7 +12,6 @@ export default function Instructors() {
         {/* Heading + intro */}
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           <div className="flex flex-col gap-5">
-            <span className="block h-3.5 w-3.5 bg-accent" aria-hidden />
             <Reveal>
               <h2 className="max-w-[10ch] text-[clamp(2rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
                 Your instructors

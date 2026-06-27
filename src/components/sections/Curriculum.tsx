@@ -77,7 +77,6 @@ export default function Curriculum() {
       {/* Heading */}
       <div className="mx-auto flex w-full max-w-[1600px] items-end justify-between gap-6 px-5 pt-24 sm:px-8 sm:pt-28">
         <div className="flex flex-col gap-5">
-          <span className="block h-3.5 w-3.5 bg-accent" aria-hidden />
           <h2 className="text-[clamp(2rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
             What you&rsquo;ll learn
           </h2>
