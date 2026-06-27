@@ -21,6 +21,8 @@ export const MARQUEE = [
 ] as const;
 
 // "More than prompting" — the Design → Code → Ship practice cards.
+// img: drop a file in /public/practice and the card shows it; until then a
+// styled placeholder fills the image panel.
 export const PRACTICE = {
   heading: ["More than prompting.", "A real design practice."],
   cards: [
@@ -28,16 +30,19 @@ export const PRACTICE = {
       key: "design",
       label: "Design",
       body: "Direct AI with taste. Moodboards, art direction, and unique visual styles you control instead of accept.",
+      img: "/practice/design.jpg",
     },
     {
       key: "code",
       label: "Code",
       body: "Brief, review, and direct AI agents that write real code — orchestrating GSAP, Lenis, Framer Motion, and WebGL into the build.",
+      img: "/practice/code.jpg",
     },
     {
       key: "ship",
       label: "Ship",
       body: "Idea to deployed: animated, interactive, production-ready experiences that go live — not just mockups.",
+      img: "/practice/ship.jpg",
     },
   ],
 } as const;
