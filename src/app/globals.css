@@ -1,20 +1,65 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (toggled on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ------------------------------------------------------------------ *
- * Design tokens (Tailwind v4 CSS-first config)
- * Generates utilities: bg-paper, text-ink, bg-accent, border-line ...
+ * Theme color sources. These flip under .dark; the @theme block below
+ * maps the Tailwind tokens onto them so every utility follows the theme.
+ * Contrast targets: text/bg pairs meet WCAG AA in both modes.
  * ------------------------------------------------------------------ */
-@theme {
-  --color-paper: #faf9f5;
-  --color-paper-2: #f2f0e9;
-  --color-ink: #16150f;
-  --color-ink-2: #2a2925;
-  --color-muted: #6f6d63;
-  --color-accent: #f6a93b;
-  --color-accent-deep: #e08a14;
-  --color-panel: #15140f;
-  --color-line: color-mix(in srgb, #16150f 12%, transparent);
-  --color-line-strong: color-mix(in srgb, #16150f 26%, transparent);
+:root {
+  --c-paper: #faf9f5;
+  --c-paper-2: #f2f0e9;
+  --c-ink: #16150f;
+  --c-ink-2: #2a2925;
+  --c-muted: #6f6d63;
+  --c-line: color-mix(in srgb, #16150f 12%, transparent);
+  --c-line-strong: color-mix(in srgb, #16150f 26%, transparent);
+
+  /* Fixed (do not invert) */
+  --c-accent: #f6a93b;
+  --c-accent-deep: #e08a14;
+  --c-panel: #15140f;
+  --c-on-light: #16150f; /* dark text for light / coloured surfaces */
+  --c-on-dark: #f4f2ec; /* light text for dark surfaces */
+
+  /* Outcomes scroll-fill (dim -> filled) */
+  --tk-dim: #bfbdb2;
+  --tk-fill: #16150f;
+}
+
+.dark {
+  --c-paper: #100f0c;
+  --c-paper-2: #1b1915;
+  --c-ink: #f4f2ec;
+  --c-ink-2: #c4c0b5;
+  --c-muted: #969184;
+  --c-line: color-mix(in srgb, #f4f2ec 15%, transparent);
+  --c-line-strong: color-mix(in srgb, #f4f2ec 30%, transparent);
+
+  --tk-dim: #4a473f;
+  --tk-fill: #f4f2ec;
+}
+
+/* ------------------------------------------------------------------ *
+ * Tailwind v4 tokens (inline so utilities resolve the runtime vars)
+ * Generates utilities: bg-paper, text-ink, bg-accent, border-line,
+ * text-on-light, text-on-dark ...
+ * ------------------------------------------------------------------ */
+@theme inline {
+  --color-paper: var(--c-paper);
+  --color-paper-2: var(--c-paper-2);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-accent: var(--c-accent);
+  --color-accent-deep: var(--c-accent-deep);
+  --color-panel: var(--c-panel);
+  --color-on-light: var(--c-on-light);
+  --color-on-dark: var(--c-on-dark);
 
   --font-sans: var(--font-switzer), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
@@ -30,23 +75,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--c-paper);
+    color: var(--c-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01";
+    font-weight: 500; /* medium is the lightest weight used on the site */
     overflow-x: clip;
+    transition:
+      background-color 0.4s var(--ease-out-expo),
+      color 0.4s var(--ease-out-expo);
   }
 
   ::selection {
-    background: var(--color-accent);
-    color: var(--color-ink);
+    background: var(--c-accent);
+    color: var(--c-on-light);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--c-ink);
     outline-offset: 3px;
   }
 }
@@ -55,7 +108,7 @@
  * Component-level helpers
  * ------------------------------------------------------------------ */
 
-/* Fluid display headline — the hero title */
+/* Fluid display headline - the hero title */
 .hero-title {
   font-weight: 600;
   font-size: clamp(2.75rem, 9.2vw, 9.25rem);
@@ -85,7 +138,7 @@
 .highlight > .highlight-bg {
   position: absolute;
   inset: 0.04em 0 0.02em 0;
-  background: var(--color-accent);
+  background: var(--c-accent);
   transform: scaleX(0);
   transform-origin: left center;
   z-index: 0;
@@ -93,6 +146,7 @@
 .highlight > .word {
   position: relative;
   z-index: 1;
+  color: var(--c-on-light); /* stays dark on the amber marker in both themes */
 }
 
 /* Seamless marquee track */
@@ -133,8 +187,8 @@
   margin-top: 8px;
   background: linear-gradient(
     to bottom,
-    var(--color-ink) 0%,
-    var(--color-ink) 50%,
+    var(--c-ink) 0%,
+    var(--c-ink) 50%,
     transparent 50%
   );
   background-size: 100% 200%;
@@ -147,6 +201,57 @@
   60%,
   100% {
     background-position: 0 100%;
+  }
+}
+
+/* FAQ full-page centerpiece - rotating glass cube */
+.faq-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(220px, 40vh, 360px);
+  perspective: 1000px;
+}
+.faq-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(240px, 32vw, 380px);
+  height: clamp(240px, 32vw, 380px);
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  filter: blur(58px);
+  border-radius: 50%;
+}
+.faq-cube {
+  --s: clamp(140px, 20vw, 250px);
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  transform-style: preserve-3d;
+  animation: cube-spin 22s linear infinite;
+}
+.faq-face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--cube) 65%, transparent);
+  background: color-mix(in srgb, var(--cube) 12%, transparent);
+  box-shadow: inset 0 0 32px color-mix(in srgb, var(--cube) 24%, transparent);
+}
+.faq-face.f1 { transform: translateZ(calc(var(--s) / 2)); }
+.faq-face.f2 { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); }
+.faq-face.f3 { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+.faq-face.f4 { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+.faq-face.f5 { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); }
+.faq-face.f6 { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+@keyframes cube-spin {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-20deg) rotateY(360deg);
   }
 }
 

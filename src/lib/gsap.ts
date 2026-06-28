@@ -6,7 +6,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// registerPlugin is idempotent — safe to call once per client load.
+// registerPlugin is idempotent - safe to call once per client load.
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }

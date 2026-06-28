@@ -5,46 +5,23 @@ import { useGSAP } from "@gsap/react";
 import { useReducedMotion } from "motion/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Reveal from "@/components/ui/Reveal";
+import ShaderImage from "@/components/ui/ShaderImage";
 import { PRACTICE } from "@/lib/content";
 
-// Per-card presentation. Content lives in lib/content.ts.
-const STYLES: Record<
-  string,
-  {
-    bg: string;
-    fg: string;
-    body: string;
-    rotate: number;
-    x: string;
-    z: string;
-  }
-> = {
-  design: {
-    bg: "#F6A93B",
-    fg: "text-ink",
-    body: "text-ink/80",
-    rotate: 2.6,
-    x: "5%",
-    z: "z-10",
-  },
-  code: {
-    bg: "#83D9E7",
-    fg: "text-ink",
-    body: "text-ink/75",
-    rotate: 1,
-    x: "-2%",
-    z: "z-20",
-  },
-  ship: {
-    bg: "#511528",
-    fg: "text-paper",
-    body: "text-paper/80",
-    rotate: -1.6,
-    x: "2%",
-    z: "z-30",
-  },
-};
+// bg = card colour, ph = solid placeholder behind the (optional) image.
+const SKINS: { bg: string; fg: string; body: string; ph: string }[] = [
+  { bg: "#F6A93B", fg: "text-on-light", body: "text-on-light/80", ph: "#511528" }, // design
+  { bg: "#83D9E7", fg: "text-on-light", body: "text-on-light/75", ph: "#15140f" }, // code
+  { bg: "#511528", fg: "text-on-dark", body: "text-on-dark/85", ph: "#163b42" }, // ship
+];
 
+const FLING = [-23, 19, -17]; // entrance tilt per card
+
+/**
+ * Sticky card stack. Each card sits a strip lower than the one before, so as you
+ * scroll they rise and stack one by one. As each enters it is flung in tilted
+ * (like tossing a book onto a pile) and settles flat with a spring overshoot.
+ */
 export default function Practice() {
   const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
@@ -52,33 +29,33 @@ export default function Practice() {
   useGSAP(
     () => {
       if (reduced) return;
-      const floats = gsap.utils.toArray<HTMLElement>(".practice-float");
-
-      gsap.from(floats, {
-        yPercent: 135,
-        autoAlpha: 0,
-        duration: 1.15,
-        ease: "power4.out",
-        stagger: 0.14,
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 72%",
-          toggleActions: "play none none none",
-        },
+      const flings = gsap.utils.toArray<HTMLElement>(".practice-fling");
+      flings.forEach((el, i) => {
+        const tilt = FLING[i % FLING.length];
+        gsap.fromTo(
+          el,
+          {
+            rotation: tilt,
+            yPercent: 40,
+            xPercent: tilt > 0 ? 14 : -14,
+            scale: 0.82,
+            transformOrigin: "50% 135%",
+          },
+          {
+            rotation: 0,
+            yPercent: 0,
+            xPercent: 0,
+            scale: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el.parentElement,
+              start: "top bottom",
+              end: "top 35%",
+              scrub: 0.8,
+            },
+          },
+        );
       });
-
-      // Gentle drift of the whole stack as it scrolls through.
-      gsap.to(".practice-stack", {
-        yPercent: -5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
-
       ScrollTrigger.refresh();
     },
     { scope: root, dependencies: [reduced] },
@@ -88,41 +65,56 @@ export default function Practice() {
     <section
       id="approach"
       ref={root}
-      className="px-5 py-28 sm:px-8 md:py-40"
+      className="bg-paper px-5 pb-[14vh] sm:px-8"
     >
       <div className="mx-auto max-w-[1600px]">
-        <Reveal>
-          <h2 className="max-w-[15ch] text-[clamp(2rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
-            {PRACTICE.heading[0]} {PRACTICE.heading[1]}
-          </h2>
-        </Reveal>
+        <div className="pt-24 sm:pt-28">
+          <Reveal>
+            <h2 className="text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+              <span className="block">{PRACTICE.heading[0]}</span>
+              <span className="block">{PRACTICE.heading[1]}</span>
+            </h2>
+          </Reveal>
+        </div>
 
-        <div className="practice-stack mt-14 max-w-[1080px] sm:mt-20">
+        <div className="mt-12 [--card-h:clamp(560px,90vh,881px)] [--strip:clamp(104px,13vh,150px)] sm:mt-16">
           {PRACTICE.cards.map((card, i) => {
-            const s = STYLES[card.key];
+            const s = SKINS[i];
             return (
               <div
                 key={card.key}
-                className={`practice-wrap group relative ${s.z} ${
-                  i > 0 ? "-mt-[200px] sm:-mt-[244px]" : ""
-                } transition-[z-index] hover:z-40`}
-                style={{ transform: `translateX(${s.x}) rotate(${s.rotate}deg)` }}
+                className="practice-card sticky"
+                style={{
+                  top: `calc(1.5rem + ${i} * 1.4rem)`,
+                  height: "var(--card-h)",
+                  zIndex: i + 1,
+                }}
               >
-                <div className="practice-float will-change-transform">
+                <div className="practice-fling h-full w-full will-change-transform">
                   <article
-                    className="practice-card flex min-h-[330px] flex-col p-7 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-4 sm:min-h-[380px] sm:p-10"
+                    className="flex h-full w-full"
                     style={{ backgroundColor: s.bg }}
                   >
-                    <h3
-                      className={`text-[clamp(2.1rem,4.5vw,3.4rem)] font-semibold leading-none tracking-[-0.02em] ${s.fg}`}
-                    >
-                      {card.label}
-                    </h3>
-                    <p
-                      className={`mt-auto max-w-[34ch] pt-12 text-[0.98rem] leading-relaxed ${s.body}`}
-                    >
-                      {card.body}
-                    </p>
+                    {/* Content */}
+                    <div className="flex flex-1 flex-col p-[clamp(1.75rem,3vw,3.5rem)]">
+                      <h3
+                        className={`text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.02em] ${s.fg}`}
+                      >
+                        {card.label}
+                      </h3>
+                      <p
+                        className={`mt-auto max-w-[24ch] text-[clamp(1.5rem,2.4vw,2.25rem)] font-medium leading-snug ${s.body}`}
+                      >
+                        {card.body}
+                      </p>
+                    </div>
+
+                    {/* Image panel: 537x646, rendered through the cursor shader */}
+                    <div className="hidden shrink-0 items-center justify-center p-[clamp(1.75rem,3vw,3.5rem)] sm:flex sm:w-[42%]">
+                      <div className="h-[646px] max-h-full w-[537px] max-w-full">
+                        <ShaderImage src={card.img} placeholder={s.ph} />
+                      </div>
+                    </div>
                   </article>
                 </div>
               </div>

@@ -4,6 +4,10 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Grain from "@/components/ui/Grain";
+import { ThemeProvider } from "@/lib/theme";
+
+// Set the theme class before paint to avoid a flash of the wrong theme.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
 
 const switzer = localFont({
   src: [
@@ -18,7 +22,7 @@ const switzer = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CUDAI — Creative UI Development with AI",
+  title: "CUDAI: Creative UI Development with AI",
   description:
     "A premium, hands-on course teaching designers, founders, and builders to ship award-winning sites and premium product UIs by directing AI to write the code.",
 };
@@ -29,10 +33,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={switzer.variable}>
+    <html lang="en" className={switzer.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="antialiased">
-        <SmoothScroll>{children}</SmoothScroll>
-        <Grain />
+        <ThemeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+          <Grain />
+        </ThemeProvider>
       </body>
     </html>
   );

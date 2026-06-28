@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Fixed film-grain overlay. Pure SVG fractal noise — no asset, no network.
+ * Fixed film-grain overlay. Pure SVG fractal noise - no asset, no network.
  * Sits above everything, never intercepts pointer events.
  */
 const NOISE =
@@ -11,7 +11,7 @@ export default function Grain() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[60] opacity-[0.045] mix-blend-multiply"
+      className="pointer-events-none fixed inset-0 z-[60] opacity-[0.045] mix-blend-multiply dark:opacity-[0.06] dark:mix-blend-screen"
       style={{ backgroundImage: `url("${NOISE}")`, backgroundSize: "180px 180px" }}
     />
   );
