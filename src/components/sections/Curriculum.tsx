@@ -13,7 +13,7 @@ function Summary({ text, hl }: { text: string; hl: string }) {
   return (
     <>
       {text.slice(0, i)}
-      <span className="box-decoration-clone bg-accent px-[0.12em] text-ink">
+      <span className="box-decoration-clone bg-accent px-[0.12em] text-on-light">
         {hl}
       </span>
       {text.slice(i + hl.length)}
@@ -109,7 +109,7 @@ export default function Curriculum() {
             </span>
             <h3 className="max-w-[14ch] text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.05] tracking-[-0.02em]">
               A capstone you actually{" "}
-              <span className="box-decoration-clone bg-accent px-[0.12em] text-ink">
+              <span className="box-decoration-clone bg-accent px-[0.12em] text-on-light">
                 ship.
               </span>
             </h3>

@@ -9,6 +9,7 @@ import {
 } from "motion/react";
 import { useLenis } from "lenis/react";
 import EnrolButton from "@/components/ui/EnrolButton";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
 export default function Nav() {
@@ -81,8 +82,11 @@ export default function Nav() {
             ))}
           </ul>
 
-          {/* CTA */}
-          <EnrolButton size="nav" onClick={() => goTo(SITE.enrolHref)} />
+          {/* Theme toggle + CTA */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <ThemeToggle />
+            <EnrolButton size="nav" onClick={() => goTo(SITE.enrolHref)} />
+          </div>
         </nav>
       </div>
     </motion.header>

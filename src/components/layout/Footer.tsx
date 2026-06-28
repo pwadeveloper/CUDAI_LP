@@ -62,18 +62,18 @@ export default function Footer() {
     "text-left uppercase tracking-wide transition-colors duration-300 hover:text-accent";
 
   return (
-    <footer className="relative overflow-hidden bg-[#100e0a] text-paper">
+    <footer className="relative overflow-hidden bg-[#100e0a] text-on-dark">
       {/* Top: clusters */}
       <div className="relative z-10 mx-auto max-w-[1600px] px-5 pt-16 sm:px-8 sm:pt-20">
         <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-10 text-base font-medium">
           {/* <div className="uppercase tracking-wide">
             <p>Now enrolling</p>
-            <p className="text-paper/45">Cohort 01</p>
+            <p className="text-on-dark/45">Cohort 01</p>
           </div> */}
 
           <div className="uppercase tracking-wide">
             <p>Contains taste™</p>
-            <p className="text-paper/45">Not generic AI output</p>
+            <p className="text-on-dark/45">Not generic AI output</p>
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -108,7 +108,7 @@ export default function Footer() {
 
           <button
             onClick={() => scrollTo("#top")}
-            className="group inline-flex items-center gap-1.5 text-base font-medium uppercase tracking-wide text-paper/55 transition-colors hover:text-paper"
+            className="group inline-flex items-center gap-1.5 text-base font-medium uppercase tracking-wide text-on-dark/55 transition-colors hover:text-on-dark"
           >
             <ArrowUpRight
               size={16}
@@ -130,7 +130,7 @@ export default function Footer() {
         <h2
           ref={word}
           aria-label="CUDAI"
-          className="pointer-events-none select-none text-center font-extrabold uppercase leading-[0.72] tracking-[-0.04em] text-paper will-change-transform [font-size:31vw]"
+          className="pointer-events-none select-none text-center font-extrabold uppercase leading-[0.72] tracking-[-0.04em] text-on-dark will-change-transform [font-size:31vw]"
         >
           CUDAI
         </h2>
@@ -138,13 +138,13 @@ export default function Footer() {
 
       {/* Bottom meta */}
       <div className="relative z-10 mx-auto max-w-[1600px] px-5 pb-8 sm:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-base font-medium uppercase tracking-wide text-paper/45">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-base font-medium uppercase tracking-wide text-on-dark/45">
           {/* <span>Design / Code / Ship</span> */}
           <span>© CUDAI 2026</span>
-          <a href="#" className="transition-colors hover:text-paper">
+          <a href="#" className="transition-colors hover:text-on-dark">
             Terms
           </a>
-          <a href="#" className="transition-colors hover:text-paper">
+          <a href="#" className="transition-colors hover:text-on-dark">
             Privacy
           </a>
           <span>Design by hand · Build with AI Code</span>

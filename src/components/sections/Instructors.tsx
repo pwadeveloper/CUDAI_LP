@@ -38,7 +38,7 @@ export default function Instructors() {
                   {/* Placeholder initial - hidden once a real photo covers it */}
                   <span
                     aria-hidden
-                    className="absolute inset-0 flex items-center justify-center text-[clamp(4rem,12vw,7rem)] font-semibold text-paper/15"
+                    className="absolute inset-0 flex items-center justify-center text-[clamp(4rem,12vw,7rem)] font-semibold text-on-dark/15"
                   >
                     {person.initial}
                   </span>
@@ -52,11 +52,11 @@ export default function Instructors() {
 
                 {/* Amber name tag, overlapping the lower-left of the portrait */}
                 <div className="absolute bottom-5 left-0 bg-accent px-4 py-2 sm:px-5 sm:py-2.5">
-                  <span className="block text-[1.05rem] font-medium leading-none tracking-[-0.01em] text-ink sm:text-xl">
+                  <span className="block text-[1.05rem] font-medium leading-none tracking-[-0.01em] text-on-light sm:text-xl">
                     {person.name}
                   </span>
                   {person.role && (
-                    <span className="mt-1.5 block text-base font-medium uppercase tracking-[0.18em] text-ink/70">
+                    <span className="mt-1.5 block text-base font-medium uppercase tracking-[0.18em] text-on-light/70">
                       {person.role}
                     </span>
                   )}

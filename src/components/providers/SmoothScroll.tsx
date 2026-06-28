@@ -24,10 +24,15 @@ function GsapLenisSync() {
 
     ScrollTrigger.refresh();
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    // Catch late layout shifts (footer-reveal spacer, images) that would
+    // otherwise leave pinned sections (the scroll-fill) measured against a
+    // shorter page and scrubbing jankily.
+    const settle = window.setTimeout(() => ScrollTrigger.refresh(), 700);
 
     return () => {
       gsap.ticker.remove(update);
       lenis.off("scroll", ScrollTrigger.update);
+      window.clearTimeout(settle);
     };
   }, [lenis]);
 

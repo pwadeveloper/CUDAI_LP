@@ -26,7 +26,7 @@ export default function HeroVisual() {
       <button
         type="button"
         aria-label="Watch the reel"
-        className="absolute left-1/2 top-1/2 grid aspect-square w-[clamp(2rem,17cqw,3.25rem)] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[clamp(0.4rem,3cqw,0.7rem)] bg-accent text-ink shadow-lg transition duration-300 hover:scale-110 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+        className="absolute left-1/2 top-1/2 grid aspect-square w-[clamp(2rem,17cqw,3.25rem)] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[clamp(0.4rem,3cqw,0.7rem)] bg-accent text-on-light shadow-lg transition duration-300 hover:scale-110 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
       >
         <PlayFilledAlt className="h-[44%] w-[44%] translate-x-[2%]" />
       </button>

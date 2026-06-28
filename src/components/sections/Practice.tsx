@@ -10,9 +10,9 @@ import { PRACTICE } from "@/lib/content";
 
 // bg = card colour, ph = solid placeholder behind the (optional) image.
 const SKINS: { bg: string; fg: string; body: string; ph: string }[] = [
-  { bg: "#F6A93B", fg: "text-ink", body: "text-ink/80", ph: "#511528" }, // design
-  { bg: "#83D9E7", fg: "text-ink", body: "text-ink/75", ph: "#15140f" }, // code
-  { bg: "#511528", fg: "text-paper", body: "text-paper/85", ph: "#163b42" }, // ship
+  { bg: "#F6A93B", fg: "text-on-light", body: "text-on-light/80", ph: "#511528" }, // design
+  { bg: "#83D9E7", fg: "text-on-light", body: "text-on-light/75", ph: "#15140f" }, // code
+  { bg: "#511528", fg: "text-on-dark", body: "text-on-dark/85", ph: "#163b42" }, // ship
 ];
 
 const FLING = [-23, 19, -17]; // entrance tilt per card

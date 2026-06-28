@@ -70,7 +70,7 @@ export default function WhoItsFor() {
     <section
       id="who"
       ref={root}
-      className="overflow-hidden bg-[#0d0c0a] py-[clamp(3.5rem,9vh,8rem)] text-paper"
+      className="overflow-hidden bg-[#0d0c0a] py-[clamp(3.5rem,9vh,8rem)] text-on-dark"
     >
       <div className="flex flex-col gap-[0.04em] text-[clamp(2.5rem,9vw,8rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em]">
         {LINES.map((items, i) => (

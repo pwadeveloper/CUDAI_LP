@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/layout/Footer";
+import { ScrollTrigger } from "@/lib/gsap";
 
 /**
  * Footer reveal: the footer is fixed behind the page; a spacer (its measured
@@ -21,6 +22,15 @@ export default function FooterReveal() {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  // The spacer height changes the total page height after mount; ScrollTrigger
+  // measured positions before that, so refresh once it settles or pinned
+  // sections (the scroll-fill) desync and scrub jankily.
+  useEffect(() => {
+    if (h === 0) return;
+    const id = window.setTimeout(() => ScrollTrigger.refresh(), 0);
+    return () => window.clearTimeout(id);
+  }, [h]);
 
   return (
     <>

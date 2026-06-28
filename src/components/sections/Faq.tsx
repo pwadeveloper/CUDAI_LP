@@ -108,7 +108,7 @@ export default function Faq() {
             role="dialog"
             aria-modal="true"
             aria-label={active.q}
-            className="fixed inset-0 z-[100] flex flex-col overflow-hidden text-paper"
+            className="fixed inset-0 z-[100] flex flex-col overflow-hidden text-on-dark"
             style={{ backgroundColor: OVERLAY_BG }}
             initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
@@ -117,14 +117,14 @@ export default function Faq() {
           >
             {/* Top bar */}
             <div className="flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
-              <span className="text-base uppercase tracking-[0.22em] text-paper/45">
+              <span className="text-base uppercase tracking-[0.22em] text-on-dark/45">
                 FAQ {String(open + 1).padStart(2, "0")} /{" "}
                 {String(FAQS.length).padStart(2, "0")}
               </span>
               <button
                 ref={closeBtn}
                 onClick={() => setOpen(null)}
-                className="group flex items-center gap-3 rounded-full bg-paper px-6 py-3.5 text-ink transition-colors duration-300 hover:bg-accent"
+                className="group flex items-center gap-3 rounded-full bg-on-dark px-6 py-3.5 text-on-light transition-colors duration-300 hover:bg-accent"
               >
                 <span className="text-base uppercase tracking-[0.16em]">
                   Close
@@ -149,10 +149,10 @@ export default function Faq() {
                     variants={fromLeft}
                     className="order-1 flex flex-col gap-4 lg:order-none lg:col-start-1"
                   >
-                    <span className="text-base uppercase tracking-[0.22em] text-paper/45">
+                    <span className="text-base uppercase tracking-[0.22em] text-on-dark/45">
                       Question
                     </span>
-                    <h3 className="max-w-[18ch] text-[clamp(1.6rem,3vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-paper">
+                    <h3 className="max-w-[18ch] text-[clamp(1.6rem,3vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-on-dark">
                       {active.q}
                     </h3>
                   </motion.div>
@@ -170,10 +170,10 @@ export default function Faq() {
                     variants={fromRight}
                     className="order-3 flex flex-col gap-4 lg:order-none lg:col-start-3 lg:items-start"
                   >
-                    <span className="text-base uppercase tracking-[0.22em] text-paper/45">
+                    <span className="text-base uppercase tracking-[0.22em] text-on-dark/45">
                       Answer
                     </span>
-                    <p className="max-w-[42ch] text-lg leading-relaxed text-paper/80 sm:text-xl">
+                    <p className="max-w-[42ch] text-lg leading-relaxed text-on-dark/80 sm:text-xl">
                       {active.a}
                     </p>
                   </motion.div>
@@ -182,10 +182,10 @@ export default function Faq() {
             </div>
 
             {/* Prev / next */}
-            <div className="flex items-center justify-between border-t border-paper/15 px-5 py-4 sm:px-8 sm:py-5">
+            <div className="flex items-center justify-between border-t border-on-dark/15 px-5 py-4 sm:px-8 sm:py-5">
               <button
                 onClick={() => go(-1)}
-                className="group flex items-center gap-2.5 text-paper/60 transition-colors hover:text-paper"
+                className="group flex items-center gap-2.5 text-on-dark/60 transition-colors hover:text-on-dark"
               >
                 <ArrowLeft
                   size={20}
@@ -197,7 +197,7 @@ export default function Faq() {
               </button>
               <button
                 onClick={() => go(1)}
-                className="group flex items-center gap-2.5 text-paper/60 transition-colors hover:text-paper"
+                className="group flex items-center gap-2.5 text-on-dark/60 transition-colors hover:text-on-dark"
               >
                 <span className="text-base uppercase tracking-[0.2em]">
                   Next

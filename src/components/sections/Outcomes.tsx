@@ -34,12 +34,14 @@ export default function Outcomes() {
       if (reduced) return;
       const tokens = gsap.utils.toArray<HTMLElement>(".tk-token");
 
-      // Start state: words light gray, chips shrunk + faint.
+      // Fade words in via opacity (compositor-friendly, no per-frame repaint).
+      // The fill follows the theme through the inherited text-ink colour, so the
+      // pin never needs rebuilding on a theme change.
       tokens.forEach((el) => {
         if (el.dataset.kind === "chip") {
           gsap.set(el, { autoAlpha: 0.25, scale: 0.4, transformOrigin: "center" });
         } else {
-          gsap.set(el, { color: "#bfbdb2" });
+          gsap.set(el, { opacity: 0.26 });
         }
       });
 
@@ -61,7 +63,7 @@ export default function Outcomes() {
         if (el.dataset.kind === "chip") {
           tl.to(el, { autoAlpha: 1, scale: 1, ease: "back.out(1.8)", duration: 1 }, i);
         } else {
-          tl.to(el, { color: "#16150f", ease: "none", duration: 1 }, i);
+          tl.to(el, { opacity: 1, ease: "none", duration: 1 }, i);
         }
       });
 
@@ -92,7 +94,7 @@ export default function Outcomes() {
                   const Icon = ICONS[t.name];
                   return (
                     <span
-                      className="tk-token inline-flex -translate-y-[0.06em] items-center justify-center rounded-[0.18em] p-[0.2em] align-middle text-ink [&>svg]:size-[0.6em]"
+                      className="tk-token inline-flex -translate-y-[0.06em] items-center justify-center rounded-[0.18em] p-[0.2em] align-middle text-on-light [&>svg]:size-[0.6em]"
                       data-kind="chip"
                       style={{ backgroundColor: TONES[t.tone] }}
                       aria-hidden
