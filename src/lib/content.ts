@@ -153,6 +153,74 @@ export const INSTRUCTORS: Instructor[] = [
   { name: "Precious", initial: "P" },
 ];
 
+export type Project = {
+  name: string;
+  type: string;
+  description: string;
+  src?: string; // drop a preview image in /public/projects/ and set the path here
+};
+
+export const PROJECTS: {
+  heading: string;
+  intro: string;
+  items: readonly Project[];
+} = {
+  heading: "What you'll ship",
+  intro:
+    "Every week ends with something real. By the end, you have two portfolio-ready deliverables — and the workflow to keep making more.",
+  items: [
+    {
+      name: "Aurora Web App",
+      type: "Web App",
+      description:
+        "A premium, animated web experience with custom motion and WebGL. The kind of interactive site that makes it onto Awwwards.",
+    },
+    {
+      name: "Nebula Analytics Dashboard",
+      type: "Product UI",
+      description:
+        "A data-rich product interface that feels crafted and intentional — not just functional. Built with a design system and Framer Motion microinteractions.",
+    },
+    {
+      name: "Orion Mobile App",
+      type: "Mobile UI",
+      description:
+        "A polished mobile-first UI with smooth transitions and a refined visual language. Designed to feel native, not like a web wrapper.",
+    },
+    {
+      name: "Luna E-commerce Site",
+      type: "E-commerce",
+      description:
+        "A high-conversion product page with scroll-driven storytelling, immersive 3D product previews, and premium editorial art direction.",
+    },
+    {
+      name: "Vortex Brand Tool",
+      type: "Custom Tool",
+      description:
+        "A bespoke internal utility built for a real workflow pain. Crafted with the same taste and intention as any client-facing product.",
+    },
+  ],
+};
+
+export const PRICING = {
+  badge: "Cohort 01",
+  heading: ["Join", "the build."],
+  price: "TBA",       // Update before launch
+  period: "one-time",
+  includes: [
+    "7 live sessions over 3 weeks",
+    "Final presentation week with structured feedback",
+    "Session recordings",
+    "Hands-on project reviews",
+    "Community access",
+    "Course resources and curated references",
+    "Portfolio-ready capstone deliverables",
+    "Access to future updates",
+  ],
+  cta: "Enrol Now",
+  note: "Limited seats · Cohort 01 · 4 weeks live",
+} as const;
+
 export type Faq = { q: string; a: string };
 
 export const FAQS: Faq[] = [
