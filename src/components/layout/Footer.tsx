@@ -21,7 +21,8 @@ export default function Footer() {
   useGSAP(
     () => {
       if (reduced || !word.current) return;
-      const o = { duration: 0.6, ease: "power3.out" };
+      // snappy + bouncy for a playful, hyper-responsive feel
+      const o = { duration: 0.45, ease: "back.out(2.4)" };
       q.current = {
         rx: gsap.quickTo(word.current, "rotationX", o),
         ry: gsap.quickTo(word.current, "rotationY", o),
@@ -37,10 +38,10 @@ export default function Footer() {
     const r = stage.current.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;
-    q.current.ry!(px * 22);
-    q.current.rx!(-py * 14);
-    q.current.x!(px * 30);
-    q.current.y!(py * 18);
+    q.current.ry!(px * 46);
+    q.current.rx!(-py * 34);
+    q.current.x!(px * 64);
+    q.current.y!(py * 40);
   };
 
   const onLeave = () => {

@@ -1,5 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
-import SmokeImage from "@/components/ui/SmokeImage";
+import ShaderImage from "@/components/ui/ShaderImage";
 import { INSTRUCTORS, INSTRUCTORS_INTRO } from "@/lib/content";
 
 // Solid placeholder behind each portrait until a real photo is set.
@@ -45,7 +45,7 @@ export default function Instructors() {
 
                   {person.src && (
                     <div className="absolute inset-0">
-                      <SmokeImage src={person.src} placeholder={PLACEHOLDER} />
+                      <ShaderImage src={person.src} placeholder={PLACEHOLDER} />
                     </div>
                   )}
                 </div>

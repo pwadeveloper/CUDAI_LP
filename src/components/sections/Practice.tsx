@@ -1,5 +1,11 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { useReducedMotion } from "motion/react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Reveal from "@/components/ui/Reveal";
-import SmokeImage from "@/components/ui/SmokeImage";
+import ShaderImage from "@/components/ui/ShaderImage";
 import { PRACTICE } from "@/lib/content";
 
 // bg = card colour, ph = solid placeholder behind the (optional) image.
@@ -9,15 +15,58 @@ const SKINS: { bg: string; fg: string; body: string; ph: string }[] = [
   { bg: "#511528", fg: "text-paper", body: "text-paper/85", ph: "#163b42" }, // ship
 ];
 
+const FLING = [-19, 16, -14]; // entrance tilt per card
+
 /**
- * Sticky card stack. Each card is sticky and sits a strip lower than the one
- * before, so as you scroll they rise and stack one by one, each covering the
- * previous and leaving its label strip. Scroll-driven (CSS sticky), so it stays
- * smooth and works the same with or without reduced motion.
+ * Sticky card stack. Each card sits a strip lower than the one before, so as you
+ * scroll they rise and stack one by one. As each enters it is flung in tilted
+ * (like tossing a book onto a pile) and settles flat with a spring overshoot.
  */
 export default function Practice() {
+  const root = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+
+  useGSAP(
+    () => {
+      if (reduced) return;
+      const flings = gsap.utils.toArray<HTMLElement>(".practice-fling");
+      flings.forEach((el, i) => {
+        const tilt = FLING[i % FLING.length];
+        gsap.fromTo(
+          el,
+          {
+            rotation: tilt,
+            yPercent: 40,
+            xPercent: tilt > 0 ? 14 : -14,
+            scale: 0.82,
+            transformOrigin: "50% 135%",
+          },
+          {
+            rotation: 0,
+            yPercent: 0,
+            xPercent: 0,
+            scale: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el.parentElement,
+              start: "top bottom",
+              end: "top 12%",
+              scrub: 1,
+            },
+          },
+        );
+      });
+      ScrollTrigger.refresh();
+    },
+    { scope: root, dependencies: [reduced] },
+  );
+
   return (
-    <section id="approach" className="bg-paper px-5 pb-[14vh] sm:px-8">
+    <section
+      id="approach"
+      ref={root}
+      className="bg-paper px-5 pb-[14vh] sm:px-8"
+    >
       <div className="mx-auto max-w-[1600px]">
         <div className="pt-24 sm:pt-28">
           <Reveal>
@@ -36,36 +85,39 @@ export default function Practice() {
                 key={card.key}
                 className="practice-card sticky"
                 style={{
-                  top: `calc(2rem + ${i} * var(--strip))`,
+                  top: `calc(1.5rem + ${i} * 1.4rem)`,
+                  marginTop: i === 0 ? undefined : "42vh",
                   height: "var(--card-h)",
                   zIndex: i + 1,
                 }}
               >
-                <article
-                  className="flex h-full w-full"
-                  style={{ backgroundColor: s.bg }}
-                >
-                  {/* Content */}
-                  <div className="flex flex-1 flex-col p-[clamp(1.75rem,3vw,3.5rem)]">
-                    <h3
-                      className={`text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.02em] ${s.fg}`}
-                    >
-                      {card.label}
-                    </h3>
-                    <p
-                      className={`mt-auto max-w-[24ch] text-[clamp(1.5rem,2.4vw,2.25rem)] font-medium leading-snug ${s.body}`}
-                    >
-                      {card.body}
-                    </p>
-                  </div>
-
-                  {/* Image panel: 537x646, rendered through the smoke shader */}
-                  <div className="hidden shrink-0 items-center justify-center p-[clamp(1.75rem,3vw,3.5rem)] sm:flex sm:w-[42%]">
-                    <div className="h-[646px] max-h-full w-[537px] max-w-full">
-                      <SmokeImage src={card.img} placeholder={s.ph} />
+                <div className="practice-fling h-full w-full will-change-transform">
+                  <article
+                    className="flex h-full w-full"
+                    style={{ backgroundColor: s.bg }}
+                  >
+                    {/* Content */}
+                    <div className="flex flex-1 flex-col p-[clamp(1.75rem,3vw,3.5rem)]">
+                      <h3
+                        className={`text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.02em] ${s.fg}`}
+                      >
+                        {card.label}
+                      </h3>
+                      <p
+                        className={`mt-auto max-w-[24ch] text-[clamp(1.5rem,2.4vw,2.25rem)] font-medium leading-snug ${s.body}`}
+                      >
+                        {card.body}
+                      </p>
                     </div>
-                  </div>
-                </article>
+
+                    {/* Image panel: 537x646, rendered through the cursor shader */}
+                    <div className="hidden shrink-0 items-center justify-center p-[clamp(1.75rem,3vw,3.5rem)] sm:flex sm:w-[42%]">
+                      <div className="h-[646px] max-h-full w-[537px] max-w-full">
+                        <ShaderImage src={card.img} placeholder={s.ph} />
+                      </div>
+                    </div>
+                  </article>
+                </div>
               </div>
             );
           })}
