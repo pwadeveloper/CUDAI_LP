@@ -2,7 +2,7 @@
 
 /**
  * The full-page FAQ centerpiece: a slowly rotating glass cube, themed per
- * question. Pure CSS 3D (transform-style: preserve-3d) — no deps. This is the
+ * question. Pure CSS 3D (transform-style: preserve-3d) - no deps. This is the
  * swap boundary: drop a real WebGL/3D render here later if desired.
  */
 const FACES = ["f1", "f2", "f3", "f4", "f5", "f6"] as const;

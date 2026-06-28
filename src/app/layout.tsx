@@ -18,7 +18,7 @@ const switzer = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CUDAI — Creative UI Development with AI",
+  title: "CUDAI: Creative UI Development with AI",
   description:
     "A premium, hands-on course teaching designers, founders, and builders to ship award-winning sites and premium product UIs by directing AI to write the code.",
 };

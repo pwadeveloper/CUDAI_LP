@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import { useReducedMotion } from "motion/react";
 import { gsap } from "@/lib/gsap";
 import { HERO } from "@/lib/content";
-import { SITE } from "@/lib/constants";
 import HeroVisual from "@/components/sections/HeroVisual";
 
 export default function Hero() {
@@ -78,27 +77,9 @@ export default function Hero() {
               </span>
             </h1>
 
-            <div className="flex flex-col gap-8">
-              <p className="hero-fade max-w-[46ch] text-lg leading-relaxed text-ink-2 sm:text-xl">
-                {HERO.subhead}
-              </p>
-
-              <div className="hero-fade flex flex-wrap gap-x-10 gap-y-4">
-                {[
-                  { k: "Format", v: SITE.duration },
-                  { k: "Structure", v: "7 parts + capstone" },
-                ].map((s) => (
-                  <div key={s.k} className="flex flex-col gap-1">
-                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-                      {s.k}
-                    </span>
-                    <span className="text-base font-medium text-ink">
-                      {s.v}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <p className="hero-fade max-w-[46ch] text-lg leading-relaxed text-ink-2 sm:text-xl">
+              {HERO.subhead}
+            </p>
           </div>
 
           {/* Right: dark panel */}
@@ -110,19 +91,6 @@ export default function Hero() {
             <HeroVisual />
           </div>
         </div>
-      </div>
-
-      {/* Bottom meta bar */}
-      <div className="mx-auto flex w-full max-w-[1600px] items-end justify-between px-5 pt-10 sm:px-8">
-        <span className="hero-fade font-mono text-[0.72rem] uppercase tracking-[0.2em] text-muted">
-          {SITE.cohort}
-        </span>
-        <span className="hero-fade scroll-cue hidden flex-col items-center font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted sm:flex">
-          Scroll
-        </span>
-        <span className="hero-fade font-mono text-[0.72rem] uppercase tracking-[0.2em] text-muted">
-          Limited seats
-        </span>
       </div>
     </section>
   );

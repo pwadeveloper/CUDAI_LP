@@ -6,7 +6,7 @@ import { useReducedMotion } from "motion/react";
 import { gsap } from "@/lib/gsap";
 
 type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  /** how far the element drifts toward the cursor (0–1) */
+  /** how far the element drifts toward the cursor (0-1) */
   strength?: number;
 };
 

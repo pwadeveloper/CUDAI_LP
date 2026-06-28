@@ -34,7 +34,7 @@ export default function Instructors() {
                   className="relative aspect-[3/4] overflow-hidden"
                   style={{ background: PLACEHOLDER }}
                 >
-                  {/* Placeholder initial — hidden once a real photo covers it */}
+                  {/* Placeholder initial - hidden once a real photo covers it */}
                   <span
                     aria-hidden
                     className="absolute inset-0 flex items-center justify-center text-[clamp(4rem,12vw,7rem)] font-semibold text-paper/15"
@@ -56,7 +56,7 @@ export default function Instructors() {
                     {person.name}
                   </span>
                   {person.role && (
-                    <span className="mt-1.5 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-ink/70">
+                    <span className="mt-1.5 block text-base font-medium uppercase tracking-[0.18em] text-ink/70">
                       {person.role}
                     </span>
                   )}

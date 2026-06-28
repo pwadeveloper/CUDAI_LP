@@ -6,7 +6,7 @@ export const HERO = {
   headline: ["Creative", "UI", "Development", "with", "AI."],
   highlight: "AI.",
   subhead:
-    "A premium, hands-on course for designers, founders, and builders. Combine design thinking and visual taste with AI speed — and make work that still feels unmistakably yours, not generic AI output.",
+    "A premium, hands-on course for designers, founders, and builders. Combine design thinking and visual taste with AI speed, and make work that still feels unmistakably yours, not generic AI output.",
 } as const;
 
 export const MARQUEE = [
@@ -20,7 +20,7 @@ export const MARQUEE = [
   "Awwwards-ready",
 ] as const;
 
-// "More than prompting" — the Design → Code → Ship practice cards.
+// "More than prompting": the Design / Code / Ship practice cards.
 // img: drop a file in /public/practice and the card shows it; until then a
 // styled placeholder fills the image panel.
 export const PRACTICE = {
@@ -35,19 +35,19 @@ export const PRACTICE = {
     {
       key: "code",
       label: "Code",
-      body: "Brief, review, and direct AI agents that write real code — orchestrating GSAP, Lenis, Framer Motion, and WebGL into the build.",
+      body: "Brief, review, and direct AI agents that write real code, orchestrating GSAP, Lenis, Framer Motion, and WebGL into the build.",
       img: "/practice/code.jpg",
     },
     {
       key: "ship",
       label: "Ship",
-      body: "Idea to deployed: animated, interactive, production-ready experiences that go live — not just mockups.",
+      body: "Idea to deployed: animated, interactive, production-ready experiences that go live, not just mockups.",
       img: "/practice/ship.jpg",
     },
   ],
 } as const;
 
-// "You'll work with modern tools..." — scroll-fill statement with inline IBM icons.
+// "You'll work with modern tools...": scroll-fill statement with inline IBM icons.
 // Rendered in DOM order: text segments split into words, icon segments become chips.
 export type ToolkitSegment =
   | { type: "text"; value: string }
@@ -92,25 +92,25 @@ export const CURRICULUM: Part[] = [
     no: "03",
     title: "Motion & Interaction Foundations",
     blurb:
-      "Where the Awwwards-level magic lives. GSAP timelines and scroll triggers, Lenis smooth scroll, and Framer Motion microinteractions — generated and refined with AI.",
+      "Where the Awwwards-level magic lives. GSAP timelines and scroll triggers, Lenis smooth scroll, and Framer Motion microinteractions, generated and refined with AI.",
   },
   {
     no: "04",
     title: "Building Custom Tools",
     blurb:
-      "Turn AI on yourself. Product thinking for tools, ruthless scope-cutting, and architecting real working software with AI — utilities shaped around your own workflow.",
+      "Turn AI on yourself. Product thinking for tools, ruthless scope-cutting, and architecting real working software with AI: utilities shaped around your own workflow.",
   },
   {
     no: "05",
     title: "WebGL & Immersive Experiences",
     blurb:
-      "Add depth, literally. Three.js, shaders, and interactive canvases through AI assistance — and the judgment to know when immersive 3D elevates an experience.",
+      "Add depth, literally. Three.js, shaders, and interactive canvases through AI assistance, and the judgment to know when immersive 3D elevates an experience.",
   },
   {
     no: "06",
     title: "Building Complete Products",
     blurb:
-      "End-to-end: idea → design → code → deployed. Tie GSAP, Lenis, Framer Motion, and WebGL into one cohesive, production-ready experience.",
+      "End to end: idea, design, code, deployed. Tie GSAP, Lenis, Framer Motion, and WebGL into one cohesive, production-ready experience.",
   },
   {
     no: "07",
@@ -140,7 +140,7 @@ export const AUDIENCE: string[] = [
 
 export type Instructor = {
   name: string;
-  // Optional one-liner shown under the name tag — left blank by default so we
+  // Optional one-liner shown under the name tag, left blank by default so we
   // don't invent titles for real people. Fill in when known.
   role?: string;
   // Drop a portrait in /public/instructors and set the path here; until then a
@@ -150,7 +150,7 @@ export type Instructor = {
 };
 
 export const INSTRUCTORS_INTRO =
-  "Not lecturers — working builders who ship. You'll learn the exact AI-driven workflow they use to design, code, and launch premium work: taught live, hands-on, with direct feedback on your own projects.";
+  "Not lecturers, but working builders who ship. You'll learn the exact AI-driven workflow they use to design, code, and launch premium work: taught live, hands-on, with direct feedback on your own projects.";
 
 export const INSTRUCTORS: Instructor[] = [
   { name: "Yahaya Muhammad", initial: "Y" },
@@ -163,15 +163,15 @@ export type Faq = { q: string; a: string };
 export const FAQS: Faq[] = [
   {
     q: "Do I need to know how to code?",
-    a: "No. You'll learn to direct AI coding agents to write real code — the focus is taste, judgment, and workflow. If you can read and review, you can build.",
+    a: "No. You'll learn to direct AI coding agents to write real code. The focus is taste, judgment, and workflow. If you can read and review, you can build.",
   },
   {
     q: "How is the course structured?",
-    a: "Three weeks of live classes (2–3 sessions a week, 7 parts), then a final week of project presentations, feedback, and portfolio recommendations.",
+    a: "Three weeks of live classes (2 to 3 sessions a week, 7 parts), then a final week of project presentations, feedback, and portfolio recommendations.",
   },
   {
     q: "What tools will I use?",
-    a: "AI coding agents like Claude Code and Antigravity, orchestrating modern web tech — GSAP, Lenis, Framer Motion, and WebGL/Three.js.",
+    a: "AI coding agents like Claude Code and Antigravity, orchestrating modern web tech: GSAP, Lenis, Framer Motion, and WebGL/Three.js.",
   },
   {
     q: "What will I walk away with?",
@@ -179,6 +179,6 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Who is this for?",
-    a: "Designers, founders, freelancers, and developers who want to ship premium, original work — not generic AI output.",
+    a: "Designers, founders, freelancers, and developers who want to ship premium, original work, not generic AI output.",
   },
 ];

@@ -84,7 +84,7 @@ export default function Faq() {
                   className="group flex w-full items-center justify-between gap-6 border-b border-line py-6 text-left sm:py-8"
                 >
                   <span className="flex items-baseline gap-4 sm:gap-8">
-                    <span className="font-mono text-sm text-muted">
+                    <span className="text-base text-muted">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[clamp(1.2rem,2.6vw,2rem)] font-medium tracking-[-0.01em] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-2">
@@ -117,8 +117,8 @@ export default function Faq() {
           >
             {/* Top bar */}
             <div className="flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
-              <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-paper/45">
-                FAQ — {String(open + 1).padStart(2, "0")} /{" "}
+              <span className="text-base uppercase tracking-[0.22em] text-paper/45">
+                FAQ {String(open + 1).padStart(2, "0")} /{" "}
                 {String(FAQS.length).padStart(2, "0")}
               </span>
               <button
@@ -126,14 +126,14 @@ export default function Faq() {
                 onClick={() => setOpen(null)}
                 className="group flex items-center gap-3 rounded-full bg-paper px-6 py-3.5 text-ink transition-colors duration-300 hover:bg-accent"
               >
-                <span className="font-mono text-sm uppercase tracking-[0.16em]">
+                <span className="text-base uppercase tracking-[0.16em]">
                   Close
                 </span>
                 <Close size={24} />
               </button>
             </div>
 
-            {/* Body — question (left) · visual (center) · answer (right); stacked on mobile */}
+            {/* Body - question (left) · visual (center) · answer (right); stacked on mobile */}
             <div className="flex flex-1 items-center overflow-y-auto px-5 py-8 sm:px-8">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -144,12 +144,12 @@ export default function Faq() {
                   exit="exit"
                   className="mx-auto flex w-full max-w-[1600px] flex-col gap-12 lg:grid lg:grid-cols-3 lg:items-center lg:gap-10"
                 >
-                  {/* Question — left */}
+                  {/* Question - left */}
                   <motion.div
                     variants={fromLeft}
                     className="order-1 flex flex-col gap-4 lg:order-none lg:col-start-1"
                   >
-                    <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-paper/45">
+                    <span className="text-base uppercase tracking-[0.22em] text-paper/45">
                       Question
                     </span>
                     <h3 className="max-w-[18ch] text-[clamp(1.6rem,3vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-paper">
@@ -157,7 +157,7 @@ export default function Faq() {
                     </h3>
                   </motion.div>
 
-                  {/* Visual — center */}
+                  {/* Visual - center */}
                   <motion.div
                     variants={pop}
                     className="order-2 lg:order-none lg:col-start-2"
@@ -165,12 +165,12 @@ export default function Faq() {
                     <FaqVisual color={COLORS[open % COLORS.length]} />
                   </motion.div>
 
-                  {/* Answer — right */}
+                  {/* Answer - right */}
                   <motion.div
                     variants={fromRight}
                     className="order-3 flex flex-col gap-4 lg:order-none lg:col-start-3 lg:items-end"
                   >
-                    <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-paper/45">
+                    <span className="text-base uppercase tracking-[0.22em] text-paper/45">
                       Answer
                     </span>
                     <p className="max-w-[42ch] text-lg leading-relaxed text-paper/80 sm:text-xl">
@@ -191,7 +191,7 @@ export default function Faq() {
                   size={20}
                   className="transition-transform duration-300 group-hover:-translate-x-1"
                 />
-                <span className="font-mono text-[0.72rem] uppercase tracking-[0.2em]">
+                <span className="text-base uppercase tracking-[0.2em]">
                   Prev
                 </span>
               </button>
@@ -199,7 +199,7 @@ export default function Faq() {
                 onClick={() => go(1)}
                 className="group flex items-center gap-2.5 text-paper/60 transition-colors hover:text-paper"
               >
-                <span className="font-mono text-[0.72rem] uppercase tracking-[0.2em]">
+                <span className="text-base uppercase tracking-[0.2em]">
                   Next
                 </span>
                 <ArrowRight

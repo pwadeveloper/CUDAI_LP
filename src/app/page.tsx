@@ -5,6 +5,7 @@ import Curriculum from "@/components/sections/Curriculum";
 import Outcomes from "@/components/sections/Outcomes";
 import Instructors from "@/components/sections/Instructors";
 import Faq from "@/components/sections/Faq";
+import Footer from "@/components/layout/Footer";
 import Marquee from "@/components/ui/Marquee";
 import { MARQUEE } from "@/lib/content";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <Instructors />
         <Faq />
       </main>
+      <Footer />
     </>
   );
 }

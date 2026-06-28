@@ -75,7 +75,7 @@ export default function Outcomes() {
       <div className="mx-auto max-w-[1600px]">
         <p
           ref={textRef}
-          className="max-w-[15.5em] text-[clamp(1.75rem,4.7vw,4rem)] font-medium leading-[1.14] tracking-[-0.02em] text-ink"
+          className="max-w-[15em] text-[clamp(2.25rem,7vw,6.25rem)] font-medium leading-[1.08] tracking-[-0.02em] text-ink"
         >
           {TOKENS.map((t, i) => (
             <Fragment key={i}>

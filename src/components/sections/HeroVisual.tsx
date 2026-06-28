@@ -3,7 +3,7 @@
 import { useRef } from "react";
 
 /**
- * The hero's dark panel. Styled placeholder for now — a living dark surface with
+ * The hero's dark panel. Styled placeholder for now - a living dark surface with
  * a cursor-tracking amber glow and a slow ambient drift, so it reads as crafted
  * rather than an empty box. This is the swap boundary: drop a WebGL <Canvas> or a
  * <video> in place of the inner decoration later (via next/dynamic, ssr:false).
@@ -53,22 +53,6 @@ export default function HeroVisual() {
             "radial-gradient(120% 120% at 70% 30%, black, transparent 75%)",
         }}
       />
-
-      {/* corner meta */}
-      <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
-        <div className="flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-[0.22em] text-paper/55">
-          <span>Interactive build</span>
-          <span>01 / WebGL</span>
-        </div>
-        <div className="flex items-end justify-between">
-          <p className="max-w-[16ch] text-[0.95rem] leading-snug text-paper/70">
-            The kind of work that wins Awwwards — built, not just rendered.
-          </p>
-          <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-accent">
-            ↳ soon
-          </span>
-        </div>
-      </div>
 
       {/* inner hairline frame */}
       <div className="pointer-events-none absolute inset-0 border border-white/10" />

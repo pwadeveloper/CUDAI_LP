@@ -37,6 +37,7 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01";
+    font-weight: 500; /* medium is the lightest weight used on the site */
     overflow-x: clip;
   }
 
@@ -55,7 +56,7 @@
  * Component-level helpers
  * ------------------------------------------------------------------ */
 
-/* Fluid display headline — the hero title */
+/* Fluid display headline - the hero title */
 .hero-title {
   font-weight: 600;
   font-size: clamp(2.75rem, 9.2vw, 9.25rem);
@@ -150,7 +151,7 @@
   }
 }
 
-/* FAQ full-page centerpiece — rotating glass cube */
+/* FAQ full-page centerpiece - rotating glass cube */
 .faq-stage {
   position: relative;
   display: flex;

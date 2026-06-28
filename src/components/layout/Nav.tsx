@@ -54,7 +54,7 @@ export default function Nav() {
               lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0 });
             }}
             className="group flex items-center gap-2.5"
-            aria-label={`${SITE.name} — home`}
+            aria-label={`${SITE.name} home`}
           >
             <span className="block size-3 bg-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:rotate-[40deg]" />
             <span className="text-[1.15rem] font-bold tracking-[-0.04em]">
@@ -72,7 +72,7 @@ export default function Nav() {
                     e.preventDefault();
                     goTo(link.href);
                   }}
-                  className="group relative text-[0.95rem] text-ink-2 transition-colors hover:text-ink"
+                  className="group relative text-base text-ink-2 transition-colors hover:text-ink"
                 >
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-ink transition-[width] duration-400 ease-[var(--ease-out-expo)] group-hover:w-full" />
@@ -84,7 +84,7 @@ export default function Nav() {
           {/* CTA */}
           <MagneticButton
             onClick={() => goTo(SITE.enrolHref)}
-            className="rounded-full bg-ink px-5 py-2.5 text-[0.95rem] font-medium text-paper transition-colors duration-300 hover:bg-ink-2"
+            className="rounded-full bg-ink px-5 py-2.5 text-base font-medium text-paper transition-colors duration-300 hover:bg-ink-2"
           >
             Enrol Now
           </MagneticButton>

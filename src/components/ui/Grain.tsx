@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Fixed film-grain overlay. Pure SVG fractal noise — no asset, no network.
+ * Fixed film-grain overlay. Pure SVG fractal noise - no asset, no network.
  * Sits above everything, never intercepts pointer events.
  */
 const NOISE =
