@@ -6,7 +6,12 @@ export const HERO = {
   headline: ["Creative", "UI", "Development", "with", "AI."],
   highlight: "AI.",
   subhead:
-    "A premium, hands-on course for designers, founders, and builders. Combine design thinking and visual taste with AI speed, and make work that still feels unmistakably yours, not generic AI output.",
+    "Build award-winning UIs with AI that still feel unmistakably yours.",
+  reel: {
+    label: "Showreel",
+    title: "Watch the reel",
+    img: "https://images.unsplash.com/photo-1499363536502-87642509e31b?auto=format&fit=crop&w=1000&h=900&q=80",
+  },
 } as const;
 
 export const MARQUEE = [

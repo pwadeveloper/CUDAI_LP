@@ -64,7 +64,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#100e0a] text-paper">
       {/* Top: clusters */}
-      <div className="mx-auto max-w-[1600px] px-5 pt-16 sm:px-8 sm:pt-20">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-5 pt-16 sm:px-8 sm:pt-20">
         <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-10 text-base font-medium">
           {/* <div className="uppercase tracking-wide">
             <p>Now enrolling</p>
@@ -124,20 +124,20 @@ export default function Footer() {
         ref={stage}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
-        className="mb-16 mt-28 w-full sm:mb-24 sm:mt-40"
+        className="relative z-0 mb-16 mt-28 w-full sm:mb-24 sm:mt-40"
         style={{ perspective: "1200px" }}
       >
         <h2
           ref={word}
           aria-label="CUDAI"
-          className="select-none text-center font-extrabold uppercase leading-[0.72] tracking-[-0.04em] text-paper will-change-transform [font-size:31vw]"
+          className="pointer-events-none select-none text-center font-extrabold uppercase leading-[0.72] tracking-[-0.04em] text-paper will-change-transform [font-size:31vw]"
         >
           CUDAI
         </h2>
       </div>
 
       {/* Bottom meta */}
-      <div className="mx-auto max-w-[1600px] px-5 pb-8 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-5 pb-8 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-base font-medium uppercase tracking-wide text-paper/45">
           {/* <span>Design / Code / Ship</span> */}
           <span>© CUDAI 2026</span>

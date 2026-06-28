@@ -3,14 +3,25 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useReducedMotion } from "motion/react";
+import { useLenis } from "lenis/react";
 import { gsap } from "@/lib/gsap";
 import { HERO } from "@/lib/content";
 import HeroVisual from "@/components/sections/HeroVisual";
+import EnrolButton from "@/components/ui/EnrolButton";
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
   const visual = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const lenis = useLenis();
+
+  const goEnrol = () => {
+    const el =
+      typeof document !== "undefined" && document.querySelector("#enrol");
+    if (!el) return;
+    if (lenis) lenis.scrollTo(el as HTMLElement);
+    else (el as HTMLElement).scrollIntoView({ behavior: "smooth" });
+  };
 
   useGSAP(
     () => {
@@ -56,10 +67,10 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-svh flex-col pb-7 pt-24 sm:pt-28"
     >
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-center px-5 sm:px-8">
-        <div className="flex w-full flex-col gap-12 lg:flex-row lg:items-center lg:gap-12">
-          {/* Left: headline + supporting copy */}
-          <div className="flex flex-col gap-9 lg:w-[66%]">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-start px-5 sm:px-8 lg:pt-[5vh]">
+        <div className="flex w-full flex-col gap-12 lg:flex-row lg:items-end lg:gap-12">
+          {/* Left: headline + supporting copy + CTA */}
+          <div className="flex flex-col gap-8 lg:w-[62%]">
             <h1 className="hero-title">
               <span className="line-mask">
                 <span className="word">Creative</span>{" "}
@@ -77,15 +88,19 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="hero-fade max-w-[46ch] text-lg leading-relaxed text-ink-2 sm:text-xl">
+            <p className="hero-fade max-w-[30ch] text-[clamp(1.5rem,3.2vw,2.25rem)] font-medium leading-[1.12] text-ink-2">
               {HERO.subhead}
             </p>
+
+            <div className="hero-fade">
+              <EnrolButton size="md" onClick={goEnrol} />
+            </div>
           </div>
 
-          {/* Right: dark panel */}
+          {/* Right: square reel card, aligned with the supporting text */}
           <div
             ref={visual}
-            className="aspect-[16/11] w-full sm:aspect-[16/9] lg:ml-auto lg:aspect-[4/5] lg:w-[31%]"
+            className="aspect-video w-full lg:ml-auto lg:aspect-square lg:w-[18%]"
             style={{ willChange: "transform, clip-path" }}
           >
             <HeroVisual />
