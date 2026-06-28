@@ -43,13 +43,17 @@ export default function Outcomes() {
         }
       });
 
-      // Scrub-fill in DOM order as the section scrolls through.
+      // Pin the section and fill word-by-word over a long scroll distance, so the
+      // statement stays in place and is slow enough to read.
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: textRef.current,
-          start: "top 82%",
-          end: "center 52%",
-          scrub: 0.5,
+          trigger: root.current,
+          start: "center center",
+          end: "+=120%",
+          scrub: 0.6,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -70,12 +74,12 @@ export default function Outcomes() {
     <section
       id="outcomes"
       ref={root}
-      className="px-5 py-32 sm:px-8 md:py-48"
+      className="px-5 py-28 sm:px-8 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
         <p
           ref={textRef}
-          className="max-w-[15em] text-[clamp(2.25rem,7vw,6.25rem)] font-medium leading-[1.08] tracking-[-0.02em] text-ink"
+          className="max-w-[15em] text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-ink"
         >
           {TOKENS.map((t, i) => (
             <Fragment key={i}>

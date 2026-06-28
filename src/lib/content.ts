@@ -30,19 +30,19 @@ export const PRACTICE = {
       key: "design",
       label: "Design",
       body: "Direct AI with taste. Moodboards, art direction, and unique visual styles you control instead of accept.",
-      img: "/practice/design.jpg",
+      img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&h=1100&q=80",
     },
     {
       key: "code",
       label: "Code",
       body: "Brief, review, and direct AI agents that write real code, orchestrating GSAP, Lenis, Framer Motion, and WebGL into the build.",
-      img: "/practice/code.jpg",
+      img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&h=1100&q=80",
     },
     {
       key: "ship",
       label: "Ship",
       body: "Idea to deployed: animated, interactive, production-ready experiences that go live, not just mockups.",
-      img: "/practice/ship.jpg",
+      img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=900&h=1100&q=80",
     },
   ],
 } as const;
@@ -69,55 +69,27 @@ export const TOOLKIT: { segments: ToolkitSegment[] } = {
   ],
 };
 
+export const ENROL = {
+  lead: "Most AI tools help you generate. CUDAI teaches you to",
+  highlight: "create.",
+} as const;
+
 export type Part = {
   no: string;
-  title: string;
-  blurb: string;
+  // One-line summary (~7-8 words) shown big on the card.
+  summary: string;
+  // The word/phrase within the summary to amber-highlight.
+  highlight: string;
 };
 
 export const CURRICULUM: Part[] = [
-  {
-    no: "01",
-    title: "The New Build Stack",
-    blurb:
-      "From mockup-maker to site-shipper. Set up your AI coding environment and learn the agentic workflow: how to brief, review, and direct AI that writes real code.",
-  },
-  {
-    no: "02",
-    title: "Designing With Taste & Intention",
-    blurb:
-      "What makes a site feel premium and a product feel crafted. Develop visual judgment and direct AI outputs with intention instead of accepting generic results.",
-  },
-  {
-    no: "03",
-    title: "Motion & Interaction Foundations",
-    blurb:
-      "Where the Awwwards-level magic lives. GSAP timelines and scroll triggers, Lenis smooth scroll, and Framer Motion microinteractions, generated and refined with AI.",
-  },
-  {
-    no: "04",
-    title: "Building Custom Tools",
-    blurb:
-      "Turn AI on yourself. Product thinking for tools, ruthless scope-cutting, and architecting real working software with AI: utilities shaped around your own workflow.",
-  },
-  {
-    no: "05",
-    title: "WebGL & Immersive Experiences",
-    blurb:
-      "Add depth, literally. Three.js, shaders, and interactive canvases through AI assistance, and the judgment to know when immersive 3D elevates an experience.",
-  },
-  {
-    no: "06",
-    title: "Building Complete Products",
-    blurb:
-      "End to end: idea, design, code, deployed. Tie GSAP, Lenis, Framer Motion, and WebGL into one cohesive, production-ready experience.",
-  },
-  {
-    no: "07",
-    title: "Final Words & Resources",
-    blurb:
-      "A repeatable personal framework, curated tools and communities, and a clear path to keep growing as an AI-powered builder beyond the course.",
-  },
+  { no: "01", summary: "Direct AI coding agents to ship real builds.", highlight: "builds." },
+  { no: "02", summary: "Develop the taste that makes work feel premium.", highlight: "taste" },
+  { no: "03", summary: "Add the motion that wins Awwwards-level attention.", highlight: "motion" },
+  { no: "04", summary: "Build custom tools shaped around your own workflow.", highlight: "tools" },
+  { no: "05", summary: "Add immersive 3D and WebGL with AI assistance.", highlight: "WebGL" },
+  { no: "06", summary: "Go from idea to a deployed, complete product.", highlight: "deployed" },
+  { no: "07", summary: "Leave with a repeatable framework and resources.", highlight: "framework" },
 ];
 
 export const OUTCOMES: string[] = [
@@ -152,10 +124,13 @@ export type Instructor = {
 export const INSTRUCTORS_INTRO =
   "Not lecturers, but working builders who ship. You'll learn the exact AI-driven workflow they use to design, code, and launch premium work: taught live, hands-on, with direct feedback on your own projects.";
 
+const U = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&h=1200&q=80`;
+
 export const INSTRUCTORS: Instructor[] = [
-  { name: "Yahaya Muhammad", initial: "Y" },
-  { name: "Mudia", initial: "M" },
-  { name: "Precious", initial: "P" },
+  { name: "Yahaya Muhammad", initial: "Y", src: U("1500648767791-00dcc994a43e") },
+  { name: "Mudia", initial: "M", src: U("1507003211169-0a1dd7228f2d") },
+  { name: "Precious", initial: "P", src: U("1494790108377-be9c29b29330") },
 ];
 
 export type Faq = { q: string; a: string };

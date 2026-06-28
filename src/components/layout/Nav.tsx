@@ -8,7 +8,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { useLenis } from "lenis/react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import EnrolButton from "@/components/ui/EnrolButton";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
 export default function Nav() {
@@ -56,7 +56,7 @@ export default function Nav() {
             className="group flex items-center gap-2.5"
             aria-label={`${SITE.name} home`}
           >
-            <span className="block size-3 bg-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:rotate-[40deg]" />
+            <span className="block h-5 w-9 rounded-[4px] bg-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-105" />
             <span className="text-[1.15rem] font-bold tracking-[-0.04em]">
               {SITE.name}
             </span>
@@ -82,12 +82,7 @@ export default function Nav() {
           </ul>
 
           {/* CTA */}
-          <MagneticButton
-            onClick={() => goTo(SITE.enrolHref)}
-            className="rounded-full bg-ink px-5 py-2.5 text-base font-medium text-paper transition-colors duration-300 hover:bg-ink-2"
-          >
-            Enrol Now
-          </MagneticButton>
+          <EnrolButton size="nav" onClick={() => goTo(SITE.enrolHref)} />
         </nav>
       </div>
     </motion.header>

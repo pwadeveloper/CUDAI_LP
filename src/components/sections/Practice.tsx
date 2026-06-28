@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import SmokeImage from "@/components/ui/SmokeImage";
 import { PRACTICE } from "@/lib/content";
 
 // bg = card colour, ph = solid placeholder behind the (optional) image.
@@ -20,7 +21,7 @@ export default function Practice() {
       <div className="mx-auto max-w-[1600px]">
         <div className="pt-24 sm:pt-28">
           <Reveal>
-            <h2 className="text-[clamp(2rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+            <h2 className="text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
               <span className="block">{PRACTICE.heading[0]}</span>
               <span className="block">{PRACTICE.heading[1]}</span>
             </h2>
@@ -58,17 +59,11 @@ export default function Practice() {
                     </p>
                   </div>
 
-                  {/* Image panel: 537x646 image (placeholder until a real image is set) */}
+                  {/* Image panel: 537x646, rendered through the smoke shader */}
                   <div className="hidden shrink-0 items-center justify-center p-[clamp(1.75rem,3vw,3.5rem)] sm:flex sm:w-[42%]">
-                    <div
-                      className="h-[646px] max-h-full w-[537px] max-w-full"
-                      style={{
-                        backgroundColor: s.ph,
-                        backgroundImage: `url(${card.img})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    />
+                    <div className="h-[646px] max-h-full w-[537px] max-w-full">
+                      <SmokeImage src={card.img} placeholder={s.ph} />
+                    </div>
                   </div>
                 </article>
               </div>

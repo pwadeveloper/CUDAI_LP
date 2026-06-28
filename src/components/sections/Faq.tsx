@@ -7,8 +7,8 @@ import { Close, ArrowLeft, ArrowRight, ArrowUpRight } from "@carbon/icons-react"
 import { FAQS } from "@/lib/content";
 import FaqVisual from "@/components/sections/FaqVisual";
 
-// Dark, soft, accessible backdrop for the full-screen takeover.
-const OVERLAY_BG = "#20242e";
+// Black backdrop for the full-screen takeover.
+const OVERLAY_BG = "#0d0c0a";
 // Themed cube colour per question, cycling the brand palette.
 const COLORS = ["#F6A93B", "#83D9E7", "#A8E6A1", "#F8C9C9", "#C9B6F8"];
 
@@ -71,7 +71,7 @@ export default function Faq() {
       {/* List */}
       <section id="faq" className="px-5 py-28 sm:px-8 md:py-40">
         <div className="mx-auto max-w-[1600px]">
-          <h2 className="text-[clamp(2rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+          <h2 className="text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
             Frequently asked
           </h2>
 
@@ -108,7 +108,7 @@ export default function Faq() {
             role="dialog"
             aria-modal="true"
             aria-label={active.q}
-            className="fixed inset-0 z-[100] flex flex-col text-paper"
+            className="fixed inset-0 z-[100] flex flex-col overflow-hidden text-paper"
             style={{ backgroundColor: OVERLAY_BG }}
             initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
@@ -134,7 +134,7 @@ export default function Faq() {
             </div>
 
             {/* Body - question (left) · visual (center) · answer (right); stacked on mobile */}
-            <div className="flex flex-1 items-center overflow-y-auto px-5 py-8 sm:px-8">
+            <div className="flex flex-1 items-center overflow-x-hidden overflow-y-auto px-5 py-8 sm:px-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={open}
@@ -168,7 +168,7 @@ export default function Faq() {
                   {/* Answer - right */}
                   <motion.div
                     variants={fromRight}
-                    className="order-3 flex flex-col gap-4 lg:order-none lg:col-start-3 lg:items-end"
+                    className="order-3 flex flex-col gap-4 lg:order-none lg:col-start-3 lg:items-start"
                   >
                     <span className="text-base uppercase tracking-[0.22em] text-paper/45">
                       Answer

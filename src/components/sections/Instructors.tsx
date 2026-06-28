@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import SmokeImage from "@/components/ui/SmokeImage";
 import { INSTRUCTORS, INSTRUCTORS_INTRO } from "@/lib/content";
 
 // Solid placeholder behind each portrait until a real photo is set.
@@ -12,7 +13,7 @@ export default function Instructors() {
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           <div className="flex flex-col gap-5">
             <Reveal>
-              <h2 className="max-w-[10ch] text-[clamp(2rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+              <h2 className="whitespace-nowrap text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
                 Your instructors
               </h2>
             </Reveal>
@@ -43,10 +44,9 @@ export default function Instructors() {
                   </span>
 
                   {person.src && (
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
-                      style={{ backgroundImage: `url(${person.src})` }}
-                    />
+                    <div className="absolute inset-0">
+                      <SmokeImage src={person.src} placeholder={PLACEHOLDER} />
+                    </div>
                   )}
                 </div>
 
