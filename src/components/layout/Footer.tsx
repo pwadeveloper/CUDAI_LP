@@ -66,10 +66,10 @@ export default function Footer() {
       {/* Top: clusters */}
       <div className="mx-auto max-w-[1600px] px-5 pt-16 sm:px-8 sm:pt-20">
         <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-10 text-base font-medium">
-          <div className="uppercase tracking-wide">
+          {/* <div className="uppercase tracking-wide">
             <p>Now enrolling</p>
             <p className="text-paper/45">Cohort 01</p>
-          </div>
+          </div> */}
 
           <div className="uppercase tracking-wide">
             <p>Contains taste™</p>
@@ -95,15 +95,15 @@ export default function Footer() {
               rel="noopener noreferrer"
               className={`group inline-flex items-center gap-1 ${linkCls}`}
             >
-              @CUDAI
+              @INSTAGRAM
               <ArrowUpRight
                 size={16}
                 className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </a>
-            <button onClick={() => scrollTo("#top")} className={linkCls}>
+            {/* <button onClick={() => scrollTo("#top")} className={linkCls}>
               Enrol now
-            </button>
+            </button> */}
           </div>
 
           <button
@@ -139,7 +139,7 @@ export default function Footer() {
       {/* Bottom meta */}
       <div className="mx-auto max-w-[1600px] px-5 pb-8 sm:px-8">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-base font-medium uppercase tracking-wide text-paper/45">
-          <span>Design / Code / Ship</span>
+          {/* <span>Design / Code / Ship</span> */}
           <span>© CUDAI 2026</span>
           <a href="#" className="transition-colors hover:text-paper">
             Terms
@@ -147,7 +147,7 @@ export default function Footer() {
           <a href="#" className="transition-colors hover:text-paper">
             Privacy
           </a>
-          <span>Made by hand · at AI speed</span>
+          <span>Design by hand · Build with AI Code</span>
         </div>
       </div>
     </footer>

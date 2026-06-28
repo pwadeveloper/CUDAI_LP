@@ -15,7 +15,7 @@ const SKINS: { bg: string; fg: string; body: string; ph: string }[] = [
   { bg: "#511528", fg: "text-paper", body: "text-paper/85", ph: "#163b42" }, // ship
 ];
 
-const FLING = [-19, 16, -14]; // entrance tilt per card
+const FLING = [-23, 19, -17]; // entrance tilt per card
 
 /**
  * Sticky card stack. Each card sits a strip lower than the one before, so as you
@@ -46,12 +46,12 @@ export default function Practice() {
             yPercent: 0,
             xPercent: 0,
             scale: 1,
-            ease: "power2.out",
+            ease: "power3.out",
             scrollTrigger: {
               trigger: el.parentElement,
               start: "top bottom",
-              end: "top 12%",
-              scrub: 1,
+              end: "top 35%",
+              scrub: 0.8,
             },
           },
         );
@@ -86,7 +86,6 @@ export default function Practice() {
                 className="practice-card sticky"
                 style={{
                   top: `calc(1.5rem + ${i} * 1.4rem)`,
-                  marginTop: i === 0 ? undefined : "42vh",
                   height: "var(--card-h)",
                   zIndex: i + 1,
                 }}
