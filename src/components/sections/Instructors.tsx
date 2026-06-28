@@ -14,7 +14,7 @@ export default function Instructors() {
           <div className="flex flex-col gap-5">
             <Reveal>
               <h2 className="whitespace-nowrap text-[clamp(2.25rem,7vw,6.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
-                Your craftmen
+                Your craftsmen
               </h2>
             </Reveal>
           </div>
