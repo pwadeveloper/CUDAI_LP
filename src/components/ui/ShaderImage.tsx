@@ -1,5 +1,15 @@
 "use client";
 
+// THREE.Clock was deprecated in r168 in favour of THREE.Timer.
+// @react-three/drei still calls it internally; suppress until the package updates.
+if (typeof window !== "undefined") {
+  const _warn = console.warn.bind(console);
+  console.warn = (...args: Parameters<typeof console.warn>) => {
+    if (typeof args[0] === "string" && args[0].includes("THREE.Clock")) return;
+    _warn(...args);
+  };
+}
+
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";

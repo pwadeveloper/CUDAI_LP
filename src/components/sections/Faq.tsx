@@ -115,22 +115,21 @@ export default function Faq() {
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.55, ease: EASE }}
           >
+            <button
+              ref={closeBtn}
+              onClick={() => setOpen(null)}
+              aria-label="Close FAQ overlay"
+              className="absolute right-5 top-5 z-10 grid h-12 w-12 place-items-center rounded-full border border-on-dark/15 bg-on-dark/[0.06] text-on-dark/68 backdrop-blur-md transition-[background-color,color,border-color,transform] duration-300 hover:border-on-dark/30 hover:bg-on-dark hover:text-on-light hover:scale-[1.03] sm:right-8 sm:top-6"
+            >
+              <Close size={20} />
+            </button>
+
             {/* Top bar */}
             <div className="flex items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
               <span className="text-base uppercase tracking-[0.22em] text-on-dark/45">
                 FAQ {String(open + 1).padStart(2, "0")} /{" "}
                 {String(FAQS.length).padStart(2, "0")}
               </span>
-              <button
-                ref={closeBtn}
-                onClick={() => setOpen(null)}
-                className="group flex items-center gap-3 rounded-full bg-on-dark px-6 py-3.5 text-on-light transition-colors duration-300 hover:bg-accent"
-              >
-                <span className="text-base uppercase tracking-[0.16em]">
-                  Close
-                </span>
-                <Close size={24} />
-              </button>
             </div>
 
             {/* Body - question (left) · visual (center) · answer (right); stacked on mobile */}

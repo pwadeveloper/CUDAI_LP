@@ -1,30 +1,70 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useGSAP } from "@gsap/react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { PROJECTS } from "@/lib/content";
+import { PROJECTS, type ProjectCard as ProjectCardData } from "@/lib/content";
+
+const WHEEL_RADIUS = 1382.5;
+const WHEEL_SIZE = WHEEL_RADIUS * 2;
+const ARC_START = -150;
+const ARC_STEP = 20;
+const SCROLL_ROTATE = 120;
+const CARD_W = 348;
+const CARD_IMG_H = 209;
+
+function ProjectCard({
+  card,
+  className = "",
+  style,
+}: {
+  card: ProjectCardData;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <div
+      className={`overflow-hidden rounded-[6px] border border-black/4 shadow-[0_18px_34px_rgba(22,21,15,0.14)] dark:border-white/8 dark:shadow-[0_18px_38px_rgba(0,0,0,0.42)] ${className}`}
+      style={{ backgroundColor: card.color, ...style }}
+    >
+      <div
+        className="mx-[7px] mt-[7px] overflow-hidden rounded-[3.6px] bg-white/85 dark:bg-white/10"
+        style={{ height: CARD_IMG_H }}
+      >
+        <div
+          className="size-full bg-cover bg-center"
+          style={{
+            backgroundColor: card.src ? undefined : "rgb(0 0 0 / 0.25)",
+            backgroundImage: card.src ? `url(${card.src})` : undefined,
+          }}
+        />
+      </div>
+      <p className="overflow-hidden text-ellipsis whitespace-nowrap px-[14.4px] py-[14.4px] text-[0.975rem] font-medium leading-[1.2] tracking-[-0.012em] text-white/90">
+        {card.name}
+      </p>
+    </div>
+  );
+}
 
 export default function Projects() {
   const root = useRef<HTMLElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
-  const lastStep = useRef(-1);
+  const wheel = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const [active, setActive] = useState(0);
-  const count = PROJECTS.items.length;
-  const project = PROJECTS.items[active];
+  const cards = PROJECTS.cards;
+  const count = cards.length;
 
-  useGSAP(
-    () => {
-      if (reduced) return;
+  useGSAP(() => {
+    if (reduced) return;
 
-      // Heading entrance — fires as section approaches viewport, before pin
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
       gsap.from([".projects-heading", ".projects-intro"], {
         y: 24,
         autoAlpha: 0,
         duration: 0.9,
-        stagger: 0.1,
+        stagger: 0.12,
         ease: "expo.out",
         scrollTrigger: {
           trigger: root.current,
@@ -33,199 +73,144 @@ export default function Projects() {
         },
       });
 
-      // Pin + drive active step from scroll progress
       ScrollTrigger.create({
         trigger: root.current,
         start: "top top",
-        end: () => `+=${count * window.innerHeight * 0.75}`,
+        end: () => `+=${Math.max(count, 6) * window.innerHeight * 0.42}`,
         pin: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          if (bar.current) gsap.set(bar.current, { scaleX: self.progress });
-
-          const step = Math.min(Math.floor(self.progress * count), count - 1);
-          if (step !== lastStep.current) {
-            lastStep.current = step;
-            setActive(step);
-          }
+          if (!wheel.current) return;
+          gsap.set(wheel.current, { rotation: -self.progress * SCROLL_ROTATE });
         },
       });
 
       ScrollTrigger.refresh();
-    },
-    { scope: root, dependencies: [reduced, count] },
-  );
+    });
+
+    return () => mm.revert();
+  }, { scope: root, dependencies: [reduced, count], revertOnUpdate: true });
+
+  const before = "What you'll ";
+  const highlight = PROJECTS.headingHighlight;
 
   return (
     <section
       id="projects"
       ref={root}
-      className={`relative flex flex-col bg-paper px-5 sm:px-8 ${
-        reduced ? "py-28 md:py-40" : "h-svh overflow-hidden"
-      }`}
+      className={`relative bg-paper text-ink ${reduced ? "py-28 md:py-40" : "py-24 lg:h-svh lg:overflow-hidden"}`}
     >
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col pt-24 sm:pt-28">
-        {/* Heading + intro */}
-        <div>
-          <h2 className="projects-heading text-[clamp(2rem,5.5vw,5rem)] font-semibold leading-[0.975] tracking-[-0.035em]">
-            {PROJECTS.heading}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--c-accent) 10%, transparent) 0%, transparent 38%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-70 dark:opacity-100"
+        style={{
+          background:
+            "linear-gradient(180deg, color-mix(in srgb, var(--c-ink) 2%, transparent), transparent 24%, color-mix(in srgb, var(--c-ink) 4%, transparent) 100%)",
+        }}
+      />
+
+      {/* Text block */}
+      <div className="relative z-20 px-5 pt-20 sm:px-8 sm:pt-16">
+        <div className="mx-auto max-w-[1600px]">
+          <h2 className="projects-heading text-[clamp(2.75rem,5.5vw,5rem)] font-semibold leading-[1.0] tracking-[-0.035em]">
+            {before}
+            <span className="relative inline-block px-[0.1em] text-on-light">
+              <span className="relative z-10">{highlight}</span>
+              <svg
+                className="absolute left-[-0.04em] top-[-0.16em] z-0 h-[1.35em] w-[calc(100%+0.08em)]"
+                viewBox="0 0 170 108"
+                fill="none"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 14.0213L169.197 0L170 108L2.8728 107.566L0 14.0213Z"
+                  fill="#FFB149"
+                />
+              </svg>
+            </span>
           </h2>
-          <p className="projects-intro mt-4 max-w-[50ch] text-[clamp(1rem,1.6vw,1.4rem)] leading-[1.35] text-ink-2">
+          <p className="projects-intro mt-5 max-w-[860px] text-[clamp(1.2rem,5vw,2.5rem)] leading-[1.09] tracking-[-0.035em] text-ink-2">
             {PROJECTS.intro}
           </p>
         </div>
-
-        {/* List + preview */}
-        <div className="mt-10 flex flex-1 flex-col gap-10 pb-8 lg:flex-row lg:items-start lg:gap-16">
-
-          {/* Wine pill indicator + project rows */}
-          <div className="flex flex-1 gap-8 lg:gap-10">
-            {/* Pill — one dot per project, matches count dynamically */}
-            <div
-              className="hidden shrink-0 flex-col items-center self-start rounded-full px-[21.6px] py-[14px] sm:flex"
-              style={{ backgroundColor: "#323f56", gap: "9.6px" }}
-            >
-              {PROJECTS.items.map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    height: i === active ? 48 : 10,
-                    backgroundColor: i === active ? "#ffffff" : "#c8ceda",
-                  }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ width: 10, borderRadius: 999, flexShrink: 0 }}
-                />
-              ))}
-            </div>
-
-            {/* Project rows */}
-            <ul className="flex-1 divide-y divide-line">
-              {PROJECTS.items.map((item, i) => (
-                <li key={item.name}>
-                  <button
-                    onClick={() => setActive(i)}
-                    className="flex w-full items-center justify-between gap-4 py-[clamp(0.85rem,1.7vh,1.4rem)] text-left"
-                  >
-                    <motion.span
-                      animate={{ color: i === active ? "#16150f" : "#6f6d63" }}
-                      transition={{ duration: 0.3 }}
-                      className="text-[clamp(1rem,2.3vw,2rem)] font-semibold leading-tight tracking-[-0.02em]"
-                    >
-                      {item.name}
-                    </motion.span>
-                    {/* Arrow: skewed amber shape when active, plain icon when inactive */}
-                    <span
-                      className="relative flex shrink-0 items-center justify-center"
-                      style={{ width: 30, height: 33 }}
-                      aria-hidden
-                    >
-                      {/* Shaped amber background — fades in when active */}
-                      <motion.svg
-                        className="absolute inset-0"
-                        animate={{ opacity: i === active ? 1 : 0 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        width="30"
-                        height="33"
-                        viewBox="0 0 30 33"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 4.28429L29.8583 0L30 33L0.506965 32.8675L0 4.28429Z"
-                          fill="#FFB149"
-                        />
-                      </motion.svg>
-                      {/* Arrow icon — color shifts with active state */}
-                      <motion.svg
-                        className="relative z-10"
-                        animate={{ color: i === active ? "#16150f" : "#6f6d63" }}
-                        transition={{ duration: 0.25 }}
-                        width="17"
-                        height="13"
-                        viewBox="0 0 17 13"
-                        fill="none"
-                      >
-                        <path
-                          d="M1 6.5H14.5M9.5 1L14.5 6.5L9.5 12"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </motion.svg>
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Preview panel */}
-          <div className="relative w-full lg:w-[38%] lg:shrink-0">
-            {/* Amber project-type tag */}
-            <div className="absolute -top-[14px] left-0 z-10 bg-accent px-4 py-1.5">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={project.type}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="block text-[0.8rem] font-medium tracking-[-0.01em] text-ink"
-                >
-                  {project.type}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-
-            {/* Image — gray placeholder until project.src is set */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-line">
-              <AnimatePresence mode="wait">
-                {project.src ? (
-                  <motion.img
-                    key={project.src}
-                    src={project.src}
-                    alt={project.name}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.35 }}
-                    className="absolute inset-0 size-full object-cover"
-                  />
-                ) : (
-                  <motion.div
-                    key={`blank-${active}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0"
-                  />
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Description */}
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={project.name}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-5 text-[1.125rem] leading-relaxed text-ink-2"
-              >
-                {project.description}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </div>
       </div>
 
-      {/* Scroll progress bar — matches Curriculum pattern */}
+      {/* Desktop rotating wheel */}
       {!reduced && (
-        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-line">
-          <div ref={bar} className="h-full origin-left scale-x-0 bg-ink" />
+        <div
+          ref={wheel}
+          className="absolute z-10 hidden will-change-transform lg:block"
+          style={{
+            left: "50%",
+            top: "clamp(33rem, 60vh, 38rem)",
+            width: WHEEL_SIZE,
+            height: WHEEL_SIZE,
+            marginLeft: -WHEEL_RADIUS,
+            transformOrigin: "center center",
+          }}
+        >
+          {cards.map((card, i) => {
+            const angle = ARC_START + i * ARC_STEP;
+            const rad = (angle * Math.PI) / 180;
+            const cx = WHEEL_RADIUS + WHEEL_RADIUS * Math.cos(rad);
+            const cy = WHEEL_RADIUS + WHEEL_RADIUS * Math.sin(rad);
+
+            return (
+              <div
+                key={card.name}
+                className="group absolute pointer-events-auto"
+                style={{
+                  left: cx,
+                  top: cy,
+                  width: CARD_W,
+                  transform: `translate(-50%, -50%) rotate(${angle + 90}deg)`,
+                }}
+              >
+                <ProjectCard
+                  card={card}
+                  className="transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-[1.035]"
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Mobile carousel */}
+      {!reduced && (
+        <div className="relative z-20 mt-20 sm:mt-24 lg:hidden">
+          <div className="overflow-x-auto px-5 pb-4 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex snap-x snap-mandatory gap-4">
+              {cards.map((card) => (
+                <div
+                  key={card.name}
+                  className="min-w-0 shrink-0 snap-center"
+                  style={{ width: "min(85vw, 348px)" }}
+                >
+                  <ProjectCard card={card} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reduced-motion fallback */}
+      {reduced && (
+        <div className="mx-auto mt-12 grid max-w-[1600px] grid-cols-2 gap-4 px-5 sm:grid-cols-3 sm:px-8 lg:grid-cols-4">
+          {cards.map((card) => (
+            <ProjectCard key={card.name} card={card} />
+          ))}
         </div>
       )}
     </section>

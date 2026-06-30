@@ -1,0 +1,7 @@
+[mcp_servers.kontinuo]
+command = "/usr/local/bin/kontinuo"
+args = [
+    "--store",
+    "/Users/mudia/Desktop/Desktop Files/Projects/CUDAI/.kontinuo",
+    "mcp",
+]

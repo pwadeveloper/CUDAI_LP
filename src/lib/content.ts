@@ -138,54 +138,32 @@ export const INSTRUCTORS: Instructor[] = [
   { name: "Precious", initial: "P", src: U("1494790108377-be9c29b29330") },
 ];
 
-export type Project = {
+export type ProjectCard = {
   name: string;
-  type: string;
-  description: string;
-  src?: string; // drop a preview image in /public/projects/ and set the path here
+  color: string;
+  src?: string;
 };
 
-export const PROJECTS: {
-  heading: string;
-  intro: string;
-  items: readonly Project[];
-} = {
+export const PROJECTS = {
   heading: "What you'll ship",
+  headingHighlight: "ship",
   intro:
-    "Every week ends with something real. By the end, you have two portfolio-ready deliverables — and the workflow to keep making more.",
-  items: [
-    {
-      name: "Aurora Web App",
-      type: "Web App",
-      description:
-        "A premium, animated web experience with custom motion and WebGL. The kind of interactive site that makes it onto Awwwards.",
-    },
-    {
-      name: "Nebula Analytics Dashboard",
-      type: "Product UI",
-      description:
-        "A data-rich product interface that feels crafted and intentional — not just functional. Built with a design system and Framer Motion microinteractions.",
-    },
-    {
-      name: "Orion Mobile App",
-      type: "Mobile UI",
-      description:
-        "A polished mobile-first UI with smooth transitions and a refined visual language. Designed to feel native, not like a web wrapper.",
-    },
-    {
-      name: "Luna E-commerce Site",
-      type: "E-commerce",
-      description:
-        "A high-conversion product page with scroll-driven storytelling, immersive 3D product previews, and premium editorial art direction.",
-    },
-    {
-      name: "Vortex Brand Tool",
-      type: "Custom Tool",
-      description:
-        "A bespoke internal utility built for a real workflow pain. Crafted with the same taste and intention as any client-facing product.",
-    },
-  ],
-};
+    "The curriculum ends with a deliverable. You will have a portfolio of production-quality work and a workflow to continue building.",
+  cards: [
+    { name: "Scroll-Driven Animation", color: "#201d1d", src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Smooth Scroll Setup", color: "#323f56", src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Stagger Text Reveal", color: "#4e7d55", src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Magnetic Hover Effect", color: "#ce8523", src: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Infinite Logo Marquee", color: "#c47f81", src: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "WebGL Shader Effect", color: "#201d1d", src: "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "3D Image Carousel", color: "#323f56", src: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Parallax Image Warp", color: "#4e7d55", src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Physics-Driven UI", color: "#ce8523", src: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Motion Portfolio Site", color: "#c47f81", src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Client Landing Page", color: "#201d1d", src: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=700&h=440&q=80" },
+    { name: "Custom Workflow Tool", color: "#323f56", src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&h=440&q=80" },
+  ] as ProjectCard[],
+} as const;
 
 export const PRICING = {
   badge: "Cohort 01",

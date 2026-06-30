@@ -5,7 +5,6 @@ import Curriculum from "@/components/sections/Curriculum";
 import Outcomes from "@/components/sections/Outcomes";
 import Instructors from "@/components/sections/Instructors";
 import Projects from "@/components/sections/Projects";
-import Pricing from "@/components/sections/Pricing";
 import Faq from "@/components/sections/Faq";
 import EnrolCta from "@/components/sections/EnrolCta";
 import WhoItsFor from "@/components/sections/WhoItsFor";
@@ -27,7 +26,6 @@ export default function Home() {
         <Curriculum />
         <Instructors />
         <Projects />
-        <Pricing />
         <Faq />
         <EnrolCta />
         <WhoItsFor />
