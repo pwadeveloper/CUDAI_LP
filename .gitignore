@@ -43,3 +43,8 @@ next-env.d.ts
 
 # pnpm project — keep npm lockfiles out
 package-lock.json
+.pnpm-store/
+
+# local tool + machine-specific config (kept locally, not committed)
+.codex/
+.kontinuo/
